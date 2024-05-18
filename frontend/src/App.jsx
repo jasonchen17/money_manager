@@ -3,7 +3,8 @@ import Signup from "../components/Signup"
 import Login from "../components/Login"
 import Home from "../components/Home"
 import Dashboard from "../components/Dashboard"
-import Expenses from "../components/Expenses"
+import AddTransaction from "../components/AddTransaction"
+import Transactions from "../components/Transactions"
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/expenses" element={<Expenses />}></Route>
+        <Route path="/add-transaction" element={<AddTransaction />}></Route>
+        <Route path="/transactions" element={<Transactions />}></Route>
       </Routes>
     </BrowserRouter>
   )

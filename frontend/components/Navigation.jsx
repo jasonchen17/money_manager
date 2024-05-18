@@ -12,7 +12,10 @@ const Navigation = () => {
                     <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
-                    <Link to="/expenses">Add Expense</Link>
+                    <Link to="/add-transaction">Add Transaction</Link>
+                </li>
+                <li>
+                    <Link to="/transactions">Transactions</Link>
                 </li>
             </ul>
         </nav>

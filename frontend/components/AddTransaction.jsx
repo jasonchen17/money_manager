@@ -6,17 +6,18 @@ import Navigation from './Navigation'
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-datepicker'
 
-const Expenses = () => {
-    const {addExpense} = useGlobalContext()
+const AddTransaction = () => {
+    const {addExpense, addIncome} = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
         date: '',
         category: '',
         description: '',
+        type: ''
     })
 
-    const {title, amount, date, category, description} = inputState
+    const {title, amount, date, category, description, type} = inputState
 
     const handleInput = name => e => {
         setInputState({
@@ -27,13 +28,18 @@ const Expenses = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        addExpense(inputState)
+        if (type === 'income') {
+            addIncome(inputState)
+        } else {
+            addExpense(inputState)
+        }
         setInputState({
             title: '',
             amount: '',
             date: '',
             category: '',
             description: '',
+            type: ''
         })
     
     }
@@ -89,11 +95,18 @@ const Expenses = () => {
                 />
             </div>
             <div>
-                <button type="submit">Add Expense</button>
+                <select required value={type} name="type" id="type" onChange={handleInput('type')}>
+                    <option value="" disabled>Select Type</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Add Transaction</button>
             </div>
         </form>
     </div>
   )
 }
 
-export default Expenses
+export default AddTransaction
