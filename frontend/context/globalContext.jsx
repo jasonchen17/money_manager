@@ -4,7 +4,6 @@ import axios from 'axios'
 
 const BASE_URL = "http://localhost:3000/auth/";
 
-
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({children}) => {
@@ -32,6 +31,21 @@ export const GlobalProvider = ({children}) => {
         }
     }
 
+    const addExpense = async (income) => {
+        const response = await axios.post(`${BASE_URL}add-expense`, income, {withCredentials: true})
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+    }
+
+    const addIncome = async (income) => {
+        const response = await axios.post(`${BASE_URL}add-income`, income, {withCredentials: true})
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+    }
+
+
     const totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0)
 
     const totalIncome = incomes.reduce((total, income) => total + income.amount, 0)
@@ -45,7 +59,8 @@ export const GlobalProvider = ({children}) => {
             expenses,
             setExpenses,
             getExpenses,
-            totalExpense
+            totalExpense,
+            addExpense
         }}>
             {children}
         </GlobalContext.Provider>

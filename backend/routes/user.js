@@ -118,6 +118,7 @@ router.delete('/delete-expense/:id', verifyUser, async (req, res) => {
 })
 
 router.post('/add-income', verifyUser, async (req, res) => {
+    console.log("hellooooooooo")
     const {title, amount, category, description, date}  = req.body
 
     const income = Income({
