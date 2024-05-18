@@ -3,6 +3,7 @@ import Signup from "../components/Signup"
 import Login from "../components/Login"
 import Home from "../components/Home"
 import Dashboard from "../components/Dashboard"
+import Expenses from "../components/Expenses"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/expenses" element={<Expenses />}></Route>
       </Routes>
     </BrowserRouter>
   )

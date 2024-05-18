@@ -10,6 +10,7 @@ const GlobalContext = React.createContext()
 export const GlobalProvider = ({children}) => {
 
     const [incomes, setIncomes] = useState([])
+    const [expenses, setExpenses] = useState([])
 
     const getIncomes = async () => {
         try {
@@ -21,6 +22,18 @@ export const GlobalProvider = ({children}) => {
         }
     }
 
+    const getExpenses = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}get-expenses`)
+            setExpenses(response.data)
+            console.log(response.data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0)
+
     const totalIncome = incomes.reduce((total, income) => total + income.amount, 0)
 
     return (
@@ -28,7 +41,11 @@ export const GlobalProvider = ({children}) => {
             incomes,
             setIncomes,
             getIncomes,
-            totalIncome
+            totalIncome,
+            expenses,
+            setExpenses,
+            getExpenses,
+            totalExpense
         }}>
             {children}
         </GlobalContext.Provider>
