@@ -43,60 +43,70 @@ const Home = () => {
       })
   }
 
+
   return (
-    <HeaderContainer>
-      <h1>Welcome</h1>
-      <div>
-        <LoginButton onClick={handleLogin}>
-          Log In
-        </LoginButton>
-        <SignupButton onClick={handleSignup}>
-          Sign Up
-        </SignupButton>
+    <HomeContainer>
+      <div className="NavBar">
+        <h1>Welcome</h1>
+        <div className="Button">
+          <div className="login-button" onClick={handleLogin}>
+            Log In
+          </div>
+          <div className="signup-button" onClick={handleSignup}>
+            Sign Up
+          </div>
+        </div>
       </div>
-    </HeaderContainer>
+    </HomeContainer>
   )
 }
 
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  background-color: #181c34;
-  width: 100%;
-  height: 100px;
-  padding: 30px 25%;
-  align-items: center;
-`
-
-const LoginButton = styled.button`
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 15px 15px;
-  background-color: #181c34;
-  border: 2px solid #8B4513;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-  &:hover {
-    background-color: #e1e4f1;
-    border: 2px solid #fbebe0;
+const HomeContainer = styled.div`
+  .NavBar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #181c34;
+    width: 100%;
+    height: 100px;
+    padding: 30px 25%;
+    align-items: center;
   }
-`
 
-const SignupButton = styled.button`
-  margin-left: 10px;  
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 15px 15px;
-  background-color: #6B8E23;
-  border: 2px solid #6B8E23;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-  &:hover {
-    background-color: #f2f8e4;
-    border: 2px solid #f2f8e4;
+  .Button {
+    display: flex;
   }
-`
+
+  .login-button {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 15px;
+    background-color: #181c34;
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background-color: #e1e4f1;
+      border: 2px solid #fbebe0;
+    }
+  }
+
+  .signup-button {
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 15px;
+    background-color: #6B8E23;
+    border: 2px solid #6B8E23;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background-color: #f2f8e4;
+      border: 2px solid #f2f8e4;
+    }
+  }
+  
+`;
 
 export default Home
