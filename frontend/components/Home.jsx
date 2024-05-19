@@ -6,16 +6,6 @@ import styled from 'styled-components'
 const Home = () => {
   const navigate = useNavigate()
   axios.defaults.withCredentials = true;
-  const handleLogout = () => {
-      axios.get('http://localhost:3000/auth/logout')
-      .then(res => {
-        if (res.data.status) {
-          
-        }
-      }).catch(err => {
-        console.log(err)
-      })
-  }
 
   const handleLogin = () => {
     axios.get('http://localhost:3000/auth/verify')

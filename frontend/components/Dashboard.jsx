@@ -55,10 +55,10 @@ const Dashboard = () => {
   return (
     <div>
       <Navigation />
-      <h1>Dashboard</h1>
+      {/* <h1>Dashboard</h1>
       <div>
         <Line data={chartData}/>
-      </div>
+      </div> */}
     </div>
   )
 }
