@@ -3,43 +3,116 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useGlobalContext } from '../context/globalContext'
 import Navigation from './Navigation'
+import styled from 'styled-components'
+import { format } from 'date-fns'
 
 const Transactions = () => {
     const navigate = useNavigate()
     axios.defaults.withCredentials = true
-    const {transactions, getIncomes, getExpenses } = useGlobalContext()
+    const {transactions, getIncomes, getExpenses, deleteExpense, deleteIncome } = useGlobalContext()
     const [...history] = transactions()
+    
+
+    const handleDelete = (id, type) => {
+        if (type === 'expense') {
+            deleteExpense(id)
+        } else {
+            deleteIncome(id)
+        }
+    }
 
     useEffect(() => {
         getIncomes()
         getExpenses()
-    }, [])
+    }, [deleteExpense, deleteIncome])
   return (
-    <div>
+    <>
       <Navigation />
-      Transaction History
-      {history.map((item) =>{
-                const {_id, title, amount, type} = item
-                return (
-                    <div key={_id} className="history-item">
-                        <p style={{
-                            color: type === 'expense' ? 'red' : 'var(--color-green)'
-                        }}>
-                            {title}
-                        </p>
+      <HistoryContainer>
+        <h1>Transaction History</h1>
+        <ul>
+            <li className="list-header">
+                <div>Date</div>
+                <div>Title</div>
+                <div>Category</div>
+                <div>Amount</div>
+                <div className="edit-header"><i class="fa-solid fa-trash"></i></div>
+            </li>
 
-                        <p style={{
-                            color: type === 'expense' ? 'red' : 'var(--color-green)'
-                        }}>
-                            {
-                                type === 'expense' ? `-${amount <= 0 ? 0 : amount}` : `+${amount <= 0 ? 0: amount}`
-                            }
-                        </p>
-                    </div>
-                )
+            {history.map((item) =>{
+                    const {_id, title, amount, type, date, category} = item
+                    let amountText;
+                    let amountColor;
+
+                    if (type === 'expense') {
+                        amountText = `-$${amount <= 0 ? 0 : amount}`;
+                        amountColor = 'red';
+                    } else {
+                        amountText = `+$${amount <= 0 ? 0 : amount}`;
+                        amountColor = 'green';
+                    }
+                    
+                    return (
+                        <li key={_id}>
+                            <div>{format(new Date(date), 'MM/dd/yyyy')}</div>
+                            <div>{title}</div>
+                            <div>{category}</div>
+                            <div style={{ color: amountColor }}>{amountText}</div>
+                            <div className="edit" onClick={() => handleDelete(_id, type)}>
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </li>
+                    )
             })}
-    </div>
+        </ul>
+      </HistoryContainer>
+    </>
   )
 }
+
+const HistoryContainer = styled.div`
+    margin-left: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .list-header {
+        font-weight: bold;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0px;
+        border: 1px solid white;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    li div {
+        flex: 1;
+        text-align: center;
+    }
+
+    .edit {
+        cursor: pointer;
+        flex: 0;
+        margin-right: 5rem;
+    }
+
+    .edit-header {
+        flex: 0;
+        margin-right: 5rem;
+        visibility: hidden;
+    }
+
+    
+`
 
 export default Transactions

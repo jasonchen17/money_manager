@@ -48,10 +48,24 @@ export const GlobalProvider = ({children}) => {
     const transactions = () => {
         const history = [...incomes, ...expenses]
         history.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt)
+            return new Date(b.date) - new Date(a.date)
         })
 
         return history
+    }
+
+    const deleteIncome = async (id) => {
+        const response = await axios.delete(`${BASE_URL}delete-income/${id}`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
+    }
+
+    const deleteExpense = async (id) => {
+        const response = await axios.delete(`${BASE_URL}delete-expense/${id}`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            })
     }
 
 
@@ -71,7 +85,9 @@ export const GlobalProvider = ({children}) => {
             totalExpense,
             addExpense,
             addIncome,
-            transactions
+            transactions,
+            deleteIncome,
+            deleteExpense
         }}>
             {children}
         </GlobalContext.Provider>
