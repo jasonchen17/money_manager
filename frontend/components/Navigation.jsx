@@ -52,11 +52,12 @@ const Navigation = () => {
 }
 
 const NavStyled = styled.div`
-    width: 250px;
-    height: 100%;
+    width: 300px;
+    margin-left: 2rem;
+    height: 77rem;
+    top: 50%;
+    transform: translateY(-50%);
     position: fixed;
-    top: 0;
-    left: 0;
     padding: 30px 0px;
     border: 1px solid;
     border-radius: 10px;
@@ -69,7 +70,8 @@ const NavStyled = styled.div`
         align-items:center;
         justify-content: left;
         width: 100%;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
+        margin-left: 10px;
     }
 
     .user h2 {
@@ -92,7 +94,7 @@ const NavStyled = styled.div`
         display: flex;
         align-items: center;
         cursor: pointer;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         padding: 10px 10px;
         border-radius: 5px;
     }

@@ -148,6 +148,17 @@ const AddContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 364px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    height: 77rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    width: 2164px;
 
     h1 {
         align-self: flex-start;

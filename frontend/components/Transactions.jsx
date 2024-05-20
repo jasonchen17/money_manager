@@ -71,10 +71,18 @@ const Transactions = () => {
 }
 
 const HistoryContainer = styled.div`
-    margin-left: 250px;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    margin-left: 364px;
+    height: 77rem;
+    position: absolute;
+    width: 2164px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2164px;
+    border: 1px solid;
+    border-radius: 10px;
 
     .list-header {
         font-weight: bold;
@@ -84,6 +92,9 @@ const HistoryContainer = styled.div`
         display: flex;
         flex-direction: column;
         margin-top: 20px;
+        overflow-y: scroll;
+        
+        padding-right: 20px;
     }
 
     li {
@@ -92,7 +103,7 @@ const HistoryContainer = styled.div`
         padding: 20px 0px;
         border: 1px solid;
         border-radius: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 15.4px;
     }
 
     li div {
