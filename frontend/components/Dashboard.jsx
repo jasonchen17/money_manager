@@ -120,6 +120,8 @@ const DashboardContainer = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
+  border: 1px solid;
+  height: 100vh;
   
   h1 {
     margin-bottom: 20px;
@@ -132,7 +134,7 @@ const DashboardContainer = styled.div`
   
   .chart-container {
     border-radius: 10px;
-    border: 1px solid red;
+    border: 1px solid;
     width: 85rem;
   }
 
@@ -155,11 +157,10 @@ const DashboardContainer = styled.div`
       display: block;
       text-decoration: none;
       margin-top: 15px;
-      border: 1px solid red;
+      border: 1px solid;
       border-radius: 10px;
       padding: 20px;
       text-align: center;
-      background: blue;
     }
   
   }
@@ -174,7 +175,7 @@ const DashboardContainer = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 20px 0px;
-      border: 1px solid red;
+      border: 1px solid;
       border-radius: 10px;
       margin-bottom: 15px;
   }
@@ -193,7 +194,7 @@ const DashboardContainer = styled.div`
   .totals-container li {
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
+    border: 1px solid;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;

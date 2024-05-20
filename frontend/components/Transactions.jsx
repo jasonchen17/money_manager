@@ -90,7 +90,7 @@ const HistoryContainer = styled.div`
         display: flex;
         justify-content: space-between;
         padding: 20px 0px;
-        border: 1px solid white;
+        border: 1px solid;
         border-radius: 10px;
         margin-bottom: 15px;
     }

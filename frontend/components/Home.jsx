@@ -55,11 +55,11 @@ const HomeContainer = styled.div`
   .NavBar {
     display: flex;
     justify-content: space-between;
-    background-color: #181c34;
     width: 100%;
     height: 100px;
     padding: 30px 25%;
     align-items: center;
+    border-bottom: 1px solid;
   }
 
   .Button {
@@ -70,14 +70,12 @@ const HomeContainer = styled.div`
     font-weight: 600;
     font-size: 1rem;
     padding: 15px 15px;
-    background-color: #181c34;
-    border: 2px solid #8B4513;
+    border: 2px solid;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
     &:hover {
-      background-color: #e1e4f1;
-      border: 2px solid #fbebe0;
+
     }
   }
 
@@ -86,14 +84,12 @@ const HomeContainer = styled.div`
     font-weight: 600;
     font-size: 1rem;
     padding: 15px 15px;
-    background-color: #6B8E23;
-    border: 2px solid #6B8E23;
+    border: 2px solid;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
     &:hover {
-      background-color: #f2f8e4;
-      border: 2px solid #f2f8e4;
+
     }
   }
   

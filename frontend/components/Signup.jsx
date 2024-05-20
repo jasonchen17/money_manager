@@ -68,7 +68,7 @@ const SignupContainer = styled.div`
 
     .wrapper {
         width: 410px;
-        background: gray;
+        border: 2px solid;
         border-radius: 10px;
         padding: 25px 35px;
     }
@@ -88,28 +88,25 @@ const SignupContainer = styled.div`
         width:100%;
         height: 100%;
         background: transparent;
-        border: none;
         outline: none;
-        border: 2px solid black;
+        border: 2px solid;
         border-radius: 10px;
-        color: white;
         padding: 20px 45px 20px 20px;
     }
 
     .input-box input::placeholder {
-        color: black;
+        
     }
 
     .submit-button {
         width: 100%;
         height: 45px;
-        border: none;
         outline: none;
-        background: white;
+        background-color: transparent;
+        border: 2px solid;
         border-radius: 10px;
         cursor: pointer;
         font-size: 16px;
-        color: black;
         font-weight: 600;
     }
 

@@ -58,7 +58,8 @@ const NavStyled = styled.div`
     top: 0;
     left: 0;
     padding: 30px 0px;
-    background: grey;
+    border: 1px solid;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;

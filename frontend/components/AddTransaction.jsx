@@ -174,8 +174,9 @@ const AddContainer = styled.div`
         margin-bottom: 20px;
         font-size: 1rem;
         padding: 10px;
-        border: 1px solid red;
+        border: 1px solid;
         border-radius: 5px;
+        background-color: transparent;
     }
 
     .date-picker {
@@ -184,10 +185,10 @@ const AddContainer = styled.div`
 
     form select {
         width: 40%;
+        background-color: #191919;
     }
 
     form button {
-        background-color: red;
         cursor: pointer;
     }
 
@@ -201,11 +202,10 @@ const AddContainer = styled.div`
           display: block;
           text-decoration: none;
           margin-top: 15px;
-          border: 1px solid red;
+          border: 1px solid;
           border-radius: 10px;
           padding: 20px;
           text-align: center;
-          background: blue;
         }
       
       }
@@ -220,7 +220,7 @@ const AddContainer = styled.div`
           display: flex;
           justify-content: space-between;
           padding: 20px 0px;
-          border: 1px solid red;
+          border: 1px solid;
           border-radius: 10px;
           margin-bottom: 15px;
       }
