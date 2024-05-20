@@ -6,7 +6,7 @@ const IncomeSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxLength: 50
+        maxLength: 50,
     },
     amount: {
         type: Number,
@@ -30,7 +30,7 @@ const IncomeSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
+        required: false,
         maxLength: 20,
         trim: true
     },
@@ -40,6 +40,11 @@ const IncomeSchema = new mongoose.Schema({
         required: true
     }
 }, {timestamps: true})
+
+IncomeSchema.pre('save', function(next) {
+    this.title = this.title.toUpperCase();
+    next();
+});
 
 const IncomeModel = mongoose.model("Income", IncomeSchema);
 

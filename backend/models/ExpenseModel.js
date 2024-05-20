@@ -30,7 +30,7 @@ const ExpenseSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
+        required: false,
         maxLength: 20,
         trim: true
     },
@@ -40,6 +40,11 @@ const ExpenseSchema = new mongoose.Schema({
         required: true
     }
 }, {timestamps: true})
+
+ExpenseSchema.pre('save', function(next) {
+    this.title = this.title.toUpperCase();
+    next();
+});
 
 const ExpenseModel = mongoose.model("Expense", ExpenseSchema);
 

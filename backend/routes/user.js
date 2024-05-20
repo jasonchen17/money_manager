@@ -82,7 +82,7 @@ router.post('/add-expense', verifyUser, async (req, res) => {
 
     try {
         //validations
-        if(!title || !category || !description || !date){
+        if(!title || !category || !date){
             return res.status(400).json({message: 'All fields are required!'})
         }
         if(amount <= 0 || !amount === 'number'){
@@ -118,7 +118,6 @@ router.delete('/delete-expense/:id', verifyUser, async (req, res) => {
 })
 
 router.post('/add-income', verifyUser, async (req, res) => {
-    console.log("hellooooooooo")
     const {title, amount, category, description, date}  = req.body
 
     const income = Income({
@@ -132,7 +131,7 @@ router.post('/add-income', verifyUser, async (req, res) => {
 
     try {
         //validations
-        if(!title || !category || !description || !date){
+        if(!title || !category || !date){
             return res.status(400).json({message: 'All fields are required!'})
         }
         if(amount <= 0 || !amount === 'number'){
