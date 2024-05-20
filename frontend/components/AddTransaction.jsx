@@ -133,6 +133,8 @@ const AddTransaction = () => {
                             )
                     })}
                     </ul>
+
+                    <Link to="/transactions">View all transactions</Link>
                 </div>
             </div>
         </AddContainer>
@@ -163,6 +165,7 @@ const AddContainer = styled.div`
         flex-direction: column;
         align-items: left;
         width: 30rem;
+        margin-top: 5px;
     }
 
     form input,
@@ -189,15 +192,10 @@ const AddContainer = styled.div`
     }
 
     .history-container {
-        h2 {
-          margin-bottom: 10px;
-        }
-    
-        padding: 20px;
-        margin-left: 20px;
-        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        width: 30rem;
         margin-top: 0px;
-        padding-top: 0px;
     
         a {
           display: block;
