@@ -26,17 +26,17 @@ const Navigation = () => {
                     <h2>Jason Chen</h2>
                 </div>
                 <ul className="menu-items">
-                    <li>
+                    <li onClick={() => navigate('/dashboard')}>
                         <i class="fa-solid fa-chart-line"></i>
-                        <Link to="/dashboard">Dashboard</Link>
+                        <span>Dashboard</span>
                     </li>
-                    <li>
+                    <li onClick={() => navigate('/transactions')}>
                         <i class="fa-solid fa-credit-card"></i>
-                        <Link to="/transactions">Transactions</Link>
+                        <span>Transactions</span>
                     </li>
-                    <li>
+                    <li onClick={() => navigate('/add-transaction')}>
                         <i class="fa-solid fa-money-bill-transfer"></i>
-                        <Link to="/add-transaction">Add Transaction</Link>
+                        <span>Add Transaction</span>
                     </li>
                 </ul>    
             </div>
@@ -103,14 +103,6 @@ const NavStyled = styled.div`
     ul li:hover {
         background: #333;
     }
-
-    ul li a {
-        text-decoration: none;
-        padding-left: 10px;
-        font-size: 16px;
-    }
-
-
 
 `;
 
