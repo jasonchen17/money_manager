@@ -14,7 +14,7 @@ const Dashboard = () => {
     const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, transactions } = useGlobalContext()
 
 
-    const [...history] = transactions()
+    const [...history] = transactions().slice(0, 5)
 
     const labels = history.map(item => format(new Date(item.date), 'MM/dd/yyyy'))
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
       labels,
       datasets: [
             {
-              label: 'Income',
+              label: 'Incomes',
               data: incomes.map((income) => {
                   const { amount } = income;
                   return amount;
@@ -56,38 +56,60 @@ const Dashboard = () => {
   return (
     <>
       <Navigation />
+  
       <DashboardContainer>
-        <div className="left-container">
-          <h1>Dashboard</h1>
+
+        <h1>Dashboard</h1>
+
+        <div className="chart-history-container">
           <div className="chart-container">
-          <Line data={chartData} />
+            <Line data={chartData} />
           </div>
-          <div className="totals-container">
-          <h2>Income</h2>
-          <p>{totalIncome}</p>
-          <h2>Expenses</h2>
-          <p>{totalExpense}</p>
-          <h2>Balance</h2>
-          <p>{totalIncome - totalExpense}</p>
+
+          <div className="history-container">
+            <h2>Past 5 transactions</h2>
+            <ul>
+              {history.map((item) =>{
+                      const {_id, title, amount, type} = item
+                      let amountText;
+                      let amountColor;
+
+                      if (type === 'expense') {
+                          amountText = `-$${amount <= 0 ? 0 : amount}`;
+                          amountColor = 'red';
+                      } else {
+                          amountText = `+$${amount <= 0 ? 0 : amount}`;
+                          amountColor = 'green';
+                      }
+                      
+                      return (
+                          <li key={_id}>
+                              <div>{title}</div>
+                              <div style={{ color: amountColor }}>{amountText}</div>
+                          </li>
+                      )
+              })}
+            </ul>
+
+            <Link to="/transactions">View all transactions</Link>
+
+          </div>
         </div>
-        </div>
-        <div className="history-container">
-          <h2>Past 5 transactions</h2>
-          <ul>
-            {history.slice(0, 5).map((transaction, index) => {
-              const { amount, category, date, type } = transaction
-              return (
-                <li key={index}>
-                  <h3>{type === 'income' ? 'Income' : 'Expense'}</h3>
-                  <h4>{category}</h4>
-                  <p>{amount}</p>
-                  <p>{format(new Date(date), 'MM/dd/yyyy')}</p>
-                </li>
-              )
-            })}
-          </ul>
-          <Link to="/transactions">View all transactions</Link>
-        </div>
+        <ul className="totals-container">
+          <li>
+            <h2>Total Income</h2>
+            <p>${totalIncome}</p>
+          </li>
+          <li>
+            <h2>Total Expenses</h2>
+            <p>${totalExpense}</p>
+          </li>
+          <li>
+            <h2>Total Balance</h2>
+            <p>${totalIncome - totalExpense}</p>
+          </li>
+        </ul>
+
       </DashboardContainer>
     </>
   )
@@ -97,34 +119,91 @@ const DashboardContainer = styled.div`
   margin-left: 250px;
   padding: 20px;
   display: flex;
-
-  .left-container {
-    flex: 3;
-    margin-right: 20px;
+  flex-direction: column;
+  
+  h1 {
+    margin-bottom: 20px;
   }
 
-  .left-container h1 {
-    margin-bottom: 10px;
+  .chart-history-container {
+    display: flex;
+    margin-bottom: 20px;
   }
   
-  .chart-container canvas {
-    padding: 20px;
-    border-radius: 5px;
+  .chart-container {
+    border-radius: 10px;
     border: 1px solid red;
+    width: 85rem;
   }
 
-  .totals-container {
+ .chart-container canvas {
     padding: 20px;
-    border-radius: 5px;
-    border: 1px solid red;
-    margin-top: 20px;
   }
 
   .history-container {
-    flex: 2;
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    padding: 20px;
+    margin-left: 20px;
+    flex-grow: 1;
+    margin-top: 0px;
+    padding-top: 0px;
+
+    a {
+      display: block;
+      text-decoration: none;
+      margin-top: 15px;
+      border: 1px solid red;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      background: blue;
+    }
+  
   }
 
+  .history-container ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
 
-`
+  .history-container li {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0px;
+      border: 1px solid red;
+      border-radius: 10px;
+      margin-bottom: 15px;
+  }
+
+  .history-container li div {
+    margin: 0 20px;
+  }
+
+  .totals-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 85rem;
+  }
+
+  .totals-container li {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid red;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    align-items: center;
+  }
+
+  .totals-container li p {
+    font-size: 24px;
+  }
+  
+`;
 
 export default Dashboard

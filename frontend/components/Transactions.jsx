@@ -11,7 +11,7 @@ const Transactions = () => {
     axios.defaults.withCredentials = true
     const {transactions, getIncomes, getExpenses, deleteExpense, deleteIncome } = useGlobalContext()
     const [...history] = transactions()
-    
+
 
     const handleDelete = (id, type) => {
         if (type === 'expense') {
@@ -91,7 +91,7 @@ const HistoryContainer = styled.div`
         justify-content: space-between;
         padding: 20px 0px;
         border: 1px solid white;
-        border-radius: 5px;
+        border-radius: 10px;
         margin-bottom: 15px;
     }
 
@@ -111,8 +111,7 @@ const HistoryContainer = styled.div`
         margin-right: 5rem;
         visibility: hidden;
     }
-
     
-`
+`;
 
 export default Transactions
