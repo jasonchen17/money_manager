@@ -64,6 +64,7 @@ const NavStyled = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    background: var(--secondary-color);
 
     .user {
         display: flex;
@@ -104,7 +105,7 @@ const NavStyled = styled.div`
     }
 
     ul li:hover {
-        background: #333;
+        background: var(--hover-color);
     }
 
 `;

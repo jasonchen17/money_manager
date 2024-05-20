@@ -83,9 +83,11 @@ const HistoryContainer = styled.div`
     width: 2164px;
     border: 1px solid;
     border-radius: 10px;
+    background-color: var(--secondary-color);
 
     .list-header {
         font-weight: bold;
+        background-color: #0e1b2a;
     }
 
     ul {
@@ -93,17 +95,25 @@ const HistoryContainer = styled.div`
         flex-direction: column;
         margin-top: 20px;
         overflow-y: scroll;
-        
         padding-right: 20px;
+    }
+
+    ul::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ul::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 3px;
     }
 
     li {
         display: flex;
         justify-content: space-between;
         padding: 20px 0px;
-        border: 1px solid;
         border-radius: 10px;
         margin-bottom: 15.4px;
+        background-color: #28323E;
     }
 
     li div {

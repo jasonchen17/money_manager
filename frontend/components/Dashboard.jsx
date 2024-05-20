@@ -63,7 +63,29 @@ const Dashboard = () => {
 
         <div className="chart-history-container">
           <div className="chart-container">
-            <Line data={chartData} />
+          <Line
+            data={chartData}
+            options={{
+              scales: {
+                x: {
+                  grid: {
+                    color: '#6b6b6b', // Specify the color for the x-axis grid
+                  },
+                  ticks: {
+                    color: '#6b6b6b', // Specify the color for the x-axis labels
+                  },
+                },
+                y: {
+                  grid: {
+                    color: '#6b6b6b', // Specify the color for the y-axis grid
+                  },
+                  ticks: {
+                    color: '#6b6b6b', // Specify the color for the y-axis labels
+                  },
+                },
+              },
+            }}
+          />
           </div>
 
           <div className="history-container">
@@ -127,6 +149,7 @@ const DashboardContainer = styled.div`
   transform: translateY(-50%);
   border-radius: 10px;
   width: 2164px;
+  background-color: var(--secondary-color);
 
   
   h1 {
@@ -163,10 +186,10 @@ const DashboardContainer = styled.div`
       display: block;
       text-decoration: none;
       margin-top: 15px;
-      border: 1px solid;
       border-radius: 10px;
       padding: 20px;
       text-align: center;
+      background-color: var(--button-color);
     }
   
   }
@@ -181,9 +204,9 @@ const DashboardContainer = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 20px 0px;
-      border: 1px solid;
       border-radius: 10px;
       margin-bottom: 15px;
+      background-color: var(--third-color);
   }
 
   .history-container li div {
@@ -200,11 +223,11 @@ const DashboardContainer = styled.div`
   .totals-container li {
     display: flex;
     justify-content: space-between;
-    border: 1px solid;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     align-items: center;
+    background-color: var(--third-color);
   }
 
   .totals-container li p {

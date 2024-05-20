@@ -197,6 +197,7 @@ const AddContainer = styled.div`
     form select {
         width: 40%;
         background-color: #191919;
+        cursor: pointer;
     }
 
     form button {
