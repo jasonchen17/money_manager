@@ -28,12 +28,6 @@ const IncomeSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    description: {
-        type: String,
-        required: false,
-        maxLength: 20,
-        trim: true
-    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -42,7 +36,7 @@ const IncomeSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 IncomeSchema.pre('save', function(next) {
-    this.title = this.title.toUpperCase();
+    this.title = this.title.charAt(0).toUpperCase() + this.title.slice(1).toLowerCase();
     next();
 });
 
