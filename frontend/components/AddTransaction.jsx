@@ -119,10 +119,10 @@ const AddTransaction = () => {
 
                             if (type === 'expense') {
                                 amountText = `-$${amount <= 0 ? 0 : amount}`;
-                                amountColor = 'red';
+                                amountColor = 'var(--expense-color)';
                             } else {
                                 amountText = `+$${amount <= 0 ? 0 : amount}`;
-                                amountColor = 'green';
+                                amountColor = 'var(--income-color)';
                             }
                             
                             return (
@@ -159,6 +159,7 @@ const AddContainer = styled.div`
     transform: translateY(-50%);
     border-radius: 10px;
     width: 2164px;
+    background-color: var(--secondary-color);
 
     h1 {
         align-self: flex-start;
@@ -188,6 +189,9 @@ const AddContainer = styled.div`
         border: 1px solid;
         border-radius: 5px;
         background-color: transparent;
+        &::placeholder {
+            color: var(--placeholder-color);
+          }
     }
 
     .date-picker {
@@ -198,10 +202,19 @@ const AddContainer = styled.div`
         width: 40%;
         background-color: #191919;
         cursor: pointer;
+        color: var(--placeholder-color);
+        border: 1px solid var(--text-color);
     }
+
+    form select option {
+        color: var(--placeholder-color);
+      }
 
     form button {
         cursor: pointer;
+        background-color: #556B2F;
+        border: none;
+        height: 3rem;
     }
 
     .history-container {
@@ -214,10 +227,10 @@ const AddContainer = styled.div`
           display: block;
           text-decoration: none;
           margin-top: 15px;
-          border: 1px solid;
           border-radius: 10px;
           padding: 20px;
           text-align: center;
+          background-color: var(--button-color);
         }
       
       }
@@ -232,9 +245,9 @@ const AddContainer = styled.div`
           display: flex;
           justify-content: space-between;
           padding: 20px 0px;
-          border: 1px solid;
           border-radius: 10px;
           margin-bottom: 15px;
+          background-color: var(--third-color);
       }
     
       .history-container li div {

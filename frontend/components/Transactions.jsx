@@ -46,10 +46,10 @@ const Transactions = () => {
 
                     if (type === 'expense') {
                         amountText = `-$${amount <= 0 ? 0 : amount}`;
-                        amountColor = 'red';
+                        amountColor = 'var(--expense-color)';
                     } else {
                         amountText = `+$${amount <= 0 ? 0 : amount}`;
-                        amountColor = 'green';
+                        amountColor = 'var(--income-color)';
                     }
                     
                     return (
@@ -87,7 +87,7 @@ const HistoryContainer = styled.div`
 
     .list-header {
         font-weight: bold;
-        background-color: #0e1b2a;
+        background-color: #10253d;
     }
 
     ul {
@@ -113,7 +113,7 @@ const HistoryContainer = styled.div`
         padding: 20px 0px;
         border-radius: 10px;
         margin-bottom: 15.4px;
-        background-color: #28323E;
+        background-color: var(--third-color);
     }
 
     li div {

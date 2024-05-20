@@ -98,10 +98,10 @@ const Dashboard = () => {
 
                       if (type === 'expense') {
                           amountText = `-$${amount <= 0 ? 0 : amount}`;
-                          amountColor = 'red';
+                          amountColor = 'var(--expense-color)';
                       } else {
                           amountText = `+$${amount <= 0 ? 0 : amount}`;
-                          amountColor = 'green';
+                          amountColor = 'var(--income-color)';
                       }
                       
                       return (
@@ -119,11 +119,11 @@ const Dashboard = () => {
         </div>
         <ul className="totals-container">
           <li>
-            <h2>Total Income</h2>
+            <h2 className="income">Total Income</h2>
             <p>${totalIncome}</p>
           </li>
           <li>
-            <h2>Total Expenses</h2>
+            <h2 className="expenses">Total Expenses</h2>
             <p>${totalExpense}</p>
           </li>
           <li>
@@ -232,6 +232,14 @@ const DashboardContainer = styled.div`
 
   .totals-container li p {
     font-size: 24px;
+  }
+
+  .income {
+    color: #228B22;
+  }
+
+  .expenses {
+    color: #B22222;
   }
   
 `;

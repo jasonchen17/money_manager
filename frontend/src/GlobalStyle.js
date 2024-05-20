@@ -17,6 +17,9 @@ export const GlobalStyle = createGlobalStyle`
         --hover-color: #1c252b;
         --text-color: #d9d9d9;
         --button-color: #112f4f;
+        --placeholder-color: #757575;
+        --expense-color: #F0648C;
+        --income-color: #3EDBB0;
     }
 
     body{
