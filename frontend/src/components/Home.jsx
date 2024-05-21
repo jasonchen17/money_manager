@@ -9,26 +9,25 @@ const Home = () => {
 
   const handleLogin = () => {
     axios.get('http://localhost:3000/users/verify')
-      .then(res => {
-        if (res.data.status) {
+      .then(response => {
+        // adding else statement here does not work because res returns error before status
+        if (response.data.status) {
           navigate('/dashboard')
-        } else {
-          navigate('/login')
         }
       }).catch(error => {
+        navigate('/login')
         console.log(error)
       })
   }
 
   const handleSignup = () => {
     axios.get('http://localhost:3000/users/verify')
-      .then(res => {
-        if (res.data.status) {
+      .then(response => {
+        if (response.data.status) {
           navigate('/dashboard')
-        } else {
-          navigate('/signup')
         }
       }).catch(error => {
+        navigate('/signup')
         console.log(error)
       })
   }

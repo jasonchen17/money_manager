@@ -2,7 +2,6 @@ import express from 'express';
 import {
     signup,
     login,
-    authorizeUser,
     logout,
     verifyUser,
     authorizeUser
