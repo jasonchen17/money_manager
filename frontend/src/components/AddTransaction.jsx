@@ -67,7 +67,6 @@ const AddTransaction = () => {
             setError(null);
         }
     }, [error, setError]);
-    
     return (
         <>
             <Navigation />
