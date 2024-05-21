@@ -9,8 +9,8 @@ import { format } from 'date-fns'
 const Transactions = () => {
     const navigate = useNavigate()
     axios.defaults.withCredentials = true
-    const {transactions, getIncomes, getExpenses, deleteExpense, deleteIncome } = useGlobalContext()
-    const [...history] = transactions()
+    const {transactionHistory, getIncomes, getExpenses, deleteExpense, deleteIncome } = useGlobalContext()
+    const [...history] = transactionHistory()
 
 
     const handleDelete = (id, type) => {

@@ -35,8 +35,8 @@ export const addExpense = async (req, res) => {
 
 export const getExpenses = async (req, res) => {
     try {
-        // Get all expenses sorted by creation date in descending order
-        const expenses = await Expense.find({ user: req.user._id }).sort({ createdAt: -1 });
+        // Get all expenses
+        const expenses = await Expense.find({ user: req.user._id });
 
         return res.status(200).json(expenses);
     } catch (error) {
@@ -94,7 +94,7 @@ export const addIncome = async (req, res) => {
 
 export const getIncomes = async (req, res) => {
     try {
-        const incomes = await Income.find({ user: req.user._id }).sort({ createdAt: -1 });
+        const incomes = await Income.find({ user: req.user._id });
 
         return res.status(200).json(incomes);
     } catch (error) {

@@ -1,14 +1,20 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Signup from "./components/Signup"
-import Login from "./components/Login"
-import Home from "./components/Home"
-import Dashboard from "./components/Dashboard"
-import AddTransaction from "./components/AddTransaction"
-import Transactions from "./components/Transactions"
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Dashboard from "./components/Dashboard";
+import AddTransaction from "./components/AddTransaction";
+import Transactions from "./components/Transactions";
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <BrowserRouter>
+      <Toaster
+        toastOptions={{
+          className: 'custom-toast',
+        }}
+      />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
@@ -21,4 +27,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

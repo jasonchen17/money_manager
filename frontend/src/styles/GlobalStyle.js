@@ -1,7 +1,7 @@
-import {createGlobalStyle} from 'styled-components'
+import {createGlobalStyle} from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-    *{
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -22,8 +22,13 @@ export const GlobalStyle = createGlobalStyle`
         --income-color: #3EDBB0;
     }
 
-    body{
+    body {
         background-color: var(--primary-color);
         min-height: 100vh;
+    }
+
+    .custom-toast {
+        margin-top: 20rem;
+        margin-right: 20rem;
     }
 `;

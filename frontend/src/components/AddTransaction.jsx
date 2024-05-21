@@ -1,42 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { useGlobalContext } from '../context/globalContext'
-import Navigation from './Navigation'
+import React, { useEffect, useState } from 'react';
+import { useGlobalContext } from '../context/globalContext';
+import Navigation from './Navigation';
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from 'react-datepicker'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import DatePicker from 'react-datepicker';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const AddTransaction = () => {
-    const {addExpense, addIncome, getIncomes, getExpenses, transactions} = useGlobalContext()
+    const {
+        addExpense, addIncome, getIncomes, getExpenses, transactionHistory, error, setError
+    } = useGlobalContext();
+
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
         date: '',
         category: '',
-        description: '',
         type: ''
-    })
+    });
 
-    const {title, amount, date, category, description, type} = inputState
+    // Destructure input state
+    const {title, amount, date, category, type} = inputState;
 
-    const [...history] = transactions().slice(0, 5)
+    // Get the last 5 transactions
+    const [...history] = transactionHistory().slice(0, 5);
 
     const handleInput = name => e => {
-        setInputState({
-            ...inputState,
-            [name]: e.target.value
-        })
+        // Update input state
+        setInputState({...inputState, [name]: e.target.value});
+
+        // Clear error message
     }
 
     const handleSubmit = e => {
-        e.preventDefault()
+        // Prevent reload on submit
+        e.preventDefault();
+
+        // Add transaction
         if (type === 'income') {
-            addIncome(inputState)
+            addIncome(inputState);
         } else {
-            addExpense(inputState)
+            addExpense(inputState);
         }
+
+        // clear input fields
         setInputState({
             title: '',
             amount: '',
@@ -44,13 +52,13 @@ const AddTransaction = () => {
             category: '',
             description: '',
             type: ''
-        })
+        });
     }
 
     useEffect(() => {
-        getIncomes()
-        getExpenses()
-      }, [])
+        getIncomes();
+        getExpenses();
+    }, []);
     
   return (
     <>
@@ -92,7 +100,7 @@ const AddTransaction = () => {
                         selected={date}
                         dateFormat='dd/MM/yyyy'
                         onChange={(date) => {
-                            setInputState({...inputState, date: date})
+                            setInputState({...inputState, date: date});
                         }}
                         autoComplete="off"
                     />
@@ -111,9 +119,10 @@ const AddTransaction = () => {
 
                 <div className="history-container">
                     <h2>Past 5 transactions</h2>
+
                     <ul>
                     {history.map((item) =>{
-                            const {_id, title, amount, type} = item
+                            const {_id, title, amount, type} = item;
                             let amountText;
                             let amountColor;
 
@@ -254,6 +263,28 @@ const AddContainer = styled.div`
         margin: 0 20px;
       }
 
+    .error{
+        color: red;
+        animation: shake 0.5s ease-in-out;
+        @keyframes shake {
+            0%{
+                transform: translateX(0);
+            }
+            25%{
+                transform: translateX(10px);
+            }
+            50%{
+                transform: translateX(-10px);
+            }
+            75%{
+                transform: translateX(10px);
+            }
+            100%{
+                transform: translateX(0);
+            }
+        }
+    }
+
 `;
 
-export default AddTransaction
+export default AddTransaction;

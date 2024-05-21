@@ -11,10 +11,10 @@ import styled from 'styled-components'
 const Dashboard = () => {
     const navigate = useNavigate()
     axios.defaults.withCredentials = true
-    const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, transactions } = useGlobalContext()
+    const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, transactionHistory } = useGlobalContext()
 
 
-    const [...history] = transactions().slice(0, 5)
+    const [...history] = transactionHistory().slice(0, 5)
 
     const labels = history.map(item => format(new Date(item.date), 'MM/dd/yyyy'))
 
