@@ -1,10 +1,10 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Signup from "../components/Signup"
-import Login from "../components/Login"
-import Home from "../components/Home"
-import Dashboard from "../components/Dashboard"
-import AddTransaction from "../components/AddTransaction"
-import Transactions from "../components/Transactions"
+import Signup from "./components/Signup"
+import Login from "./components/Login"
+import Home from "./components/Home"
+import Dashboard from "./components/Dashboard"
+import AddTransaction from "./components/AddTransaction"
+import Transactions from "./components/Transactions"
 
 function App() {
   return (

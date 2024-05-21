@@ -36,7 +36,7 @@ const Transactions = () => {
                 <div>Title</div>
                 <div>Category</div>
                 <div>Amount</div>
-                <div className="edit-header"><i class="fa-solid fa-trash"></i></div>
+                <div className="edit-header"><i className="fa-solid fa-trash"></i></div>
             </li>
 
             {history.map((item) =>{
@@ -59,7 +59,7 @@ const Transactions = () => {
                             <div>{category}</div>
                             <div style={{ color: amountColor }}>{amountText}</div>
                             <div className="edit" onClick={() => handleDelete(_id, type)}>
-                                <i class="fa-solid fa-trash"></i>
+                                <i className="fa-solid fa-trash"></i>
                             </div>
                         </li>
                     )

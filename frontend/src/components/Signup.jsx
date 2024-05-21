@@ -3,21 +3,22 @@ import Axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
-const Login = () => {
+const Signup = () => {
+    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const navigate = useNavigate()
 
-    Axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        Axios.post("http://localhost:3000/auth/login", {
+        Axios.post("http://localhost:3000/users/signup", {
+            username,
             email,
             password
         }).then(response => {
             if (response.data.status) {
-                navigate('/dashboard')
+                navigate('/login')
             }
         }).catch(err => {
             console.log(error)
@@ -25,34 +26,41 @@ const Login = () => {
     }
 
     return (
-        <LoginContainer>
+        <SignupContainer>
             <form className='wrapper' onSubmit={handleSubmit}>
-                <h1>Log In</h1>
+                <h1>Sign Up</h1>
                 <div className='input-box'>
-                    <input 
-                        type="email" 
+                    <input
+                        type="text"
+                        placeholder='Username'
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
+                <div className='input-box'>
+                    <input
+                        type="email"
                         autoComplete='off'
                         placeholder='Email'
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div className='input-box'>
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         placeholder='Password'
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="submit-button">Log In</button>
+                <button type="submit" className="submit-button">Sign Up</button>
                 <div className="register">
-                    <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+                    <p>Have an account? <Link to="/login">Log In</Link></p>
                 </div>
             </form>
-        </LoginContainer>
+        </SignupContainer>
     )
 }
 
-const LoginContainer = styled.div`
+const SignupContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +88,6 @@ const LoginContainer = styled.div`
         width:100%;
         height: 100%;
         background: transparent;
-        border: none;
         outline: none;
         border: 2px solid;
         border-radius: 10px;
@@ -94,14 +101,13 @@ const LoginContainer = styled.div`
     .submit-button {
         width: 100%;
         height: 45px;
-        border: none;
         outline: none;
+        background-color: var(--button-color);
+        border: 2px solid var(--button-color);
         border-radius: 10px;
         cursor: pointer;
         font-size: 16px;
         font-weight: 600;
-        background: var(--button-color);
-        border: 2px solid var(--button-color);
     }
 
     .register {
@@ -120,4 +126,4 @@ const LoginContainer = styled.div`
     }
 `;
 
-export default Login
+export default Signup

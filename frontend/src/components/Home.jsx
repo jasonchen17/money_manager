@@ -8,7 +8,7 @@ const Home = () => {
   axios.defaults.withCredentials = true;
 
   const handleLogin = () => {
-    axios.get('http://localhost:3000/auth/verify')
+    axios.get('http://localhost:3000/users/verify')
       .then(res => {
         if (res.data.status) {
           navigate('/dashboard')
@@ -21,7 +21,7 @@ const Home = () => {
   }
 
   const handleSignup = () => {
-    axios.get('http://localhost:3000/auth/verify')
+    axios.get('http://localhost:3000/users/verify')
       .then(res => {
         if (res.data.status) {
           navigate('/dashboard')

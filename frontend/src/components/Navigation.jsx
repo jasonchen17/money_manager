@@ -8,7 +8,7 @@ const Navigation = () => {
 
     axios.defaults.withCredentials = true;
     const handleLogout = () => {
-        axios.get('http://localhost:3000/auth/logout')
+        axios.get('http://localhost:3000/users/logout')
         .then(res => {
           if (res.data.status) {
             navigate('/')
@@ -22,20 +22,20 @@ const Navigation = () => {
         <NavStyled>
             <div>
                 <div className="user">
-                <i class="fa-solid fa-circle-user"></i>
+                <i className="fa-solid fa-circle-user"></i>
                     <h2>Jason Chen</h2>
                 </div>
                 <ul className="menu-items">
                     <li onClick={() => navigate('/dashboard')}>
-                        <i class="fa-solid fa-chart-line"></i>
+                        <i className="fa-solid fa-chart-line"></i>
                         <span>Dashboard</span>
                     </li>
                     <li onClick={() => navigate('/transactions')}>
-                        <i class="fa-solid fa-credit-card"></i>
+                        <i className="fa-solid fa-credit-card"></i>
                         <span>Transactions</span>
                     </li>
                     <li onClick={() => navigate('/add-transaction')}>
-                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <i className="fa-solid fa-money-bill-transfer"></i>
                         <span>Add Transaction</span>
                     </li>
                 </ul>    
@@ -43,7 +43,7 @@ const Navigation = () => {
 
             <ul className="menu-items">
                 <li onClick={handleLogout}>
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <i className="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </li>
             </ul>

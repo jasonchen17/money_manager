@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react"
 import axios from 'axios'
 
 
-const BASE_URL = "http://localhost:3000/auth/";
+const USER_BASE_URL = "http://localhost:3000/users/";
+const TRANSACTION_BASE_URL = "http://localhost:3000/transactions/";
 
 const GlobalContext = React.createContext()
 
@@ -13,9 +14,8 @@ export const GlobalProvider = ({children}) => {
 
     const getIncomes = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}get-incomes`)
+            const response = await axios.get(`${TRANSACTION_BASE_URL}get-incomes`)
             setIncomes(response.data)
-            console.log(response.data)
         } catch (error) {
             console.error(error)
         }
@@ -23,23 +23,22 @@ export const GlobalProvider = ({children}) => {
 
     const getExpenses = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}get-expenses`)
+            const response = await axios.get(`${TRANSACTION_BASE_URL}get-expenses`)
             setExpenses(response.data)
-            console.log(response.data)
         } catch (error) {
             console.error(error)
         }
     }
 
     const addExpense = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-expense`, income, {withCredentials: true})
+        const response = await axios.post(`${TRANSACTION_BASE_URL}add-expense`, income, {withCredentials: true})
             .catch((err) =>{
                 setError(err.response.data.message)
             })
     }
 
     const addIncome = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-income`, income, {withCredentials: true})
+        const response = await axios.post(`${TRANSACTION_BASE_URL}add-income`, income, {withCredentials: true})
             .catch((err) =>{
                 setError(err.response.data.message)
             })
@@ -55,14 +54,14 @@ export const GlobalProvider = ({children}) => {
     }
 
     const deleteIncome = async (id) => {
-        const response = await axios.delete(`${BASE_URL}delete-income/${id}`)
+        const response = await axios.delete(`${TRANSACTION_BASE_URL}delete-income/${id}`)
             .catch((err) =>{
                 setError(err.response.data.message)
             })
     }
 
     const deleteExpense = async (id) => {
-        const response = await axios.delete(`${BASE_URL}delete-expense/${id}`)
+        const response = await axios.delete(`${TRANSACTION_BASE_URL}delete-expense/${id}`)
             .catch((err) =>{
                 setError(err.response.data.message)
             })
