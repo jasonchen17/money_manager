@@ -42,23 +42,23 @@ export const login = async (req, res) => {
 
         // Check for empty fields
         if (!email || !password) {
-        return res.status(400).json({ error: 'Please provide all required fields' });
+            return res.status(400).json({ error: 'Please provide all required fields' });
         }
 
         // Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
-        return res.status(404).json({ error: 'User does not exist' });
+            return res.status(404).json({ error: 'User does not exist' });
         }
 
         // Check if password is correct
-        const validPassword = await bcrypt.compare(password, user.password);
-        if (!validPassword) {
-        return res.status(401).json({ error: 'Incorrect password' });
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+          return res.status(401).json({ error: 'Invalid password' });
         }
 
-        // Create and assign token
-        const token = jwt.sign({ userId: user._id }, process.env.KEY);
+        // Create and sign token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
         // Attach token to cookie
         res.cookie('token', token, {httpOnly: true})
@@ -72,10 +72,12 @@ export const login = async (req, res) => {
 export const verifyUser = async (req, res, next) => {
     try {
         const token = req.cookies.token;
+
         if (!token) {
-            return res.json({status: false, message: "no token"});
+            return res.status(401).json({ message: "No token provided" });
         }
-        const decoded = jwt.verify(token, process.env.KEY);
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const user = await User.findOne({name: decoded.name});
         if (!user) {
