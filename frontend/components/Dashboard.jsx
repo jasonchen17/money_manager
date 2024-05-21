@@ -163,7 +163,7 @@ const DashboardContainer = styled.div`
   
   .chart-container {
     border-radius: 10px;
-    border: 1px solid;
+    border: 2px solid;
     width: 85rem;
   }
 

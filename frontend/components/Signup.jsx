@@ -53,7 +53,7 @@ const Signup = () => {
                 </div>
                 <button type="submit" className="submit-button">Sign Up</button>
                 <div className="register">
-                    <p>Have an Account? <Link to="/login">Log in</Link></p>
+                    <p>Have an account? <Link to="/login">Log In</Link></p>
                 </div>
             </form>
         </SignupContainer>
@@ -67,10 +67,10 @@ const SignupContainer = styled.div`
     min-height: 100vh;
 
     .wrapper {
-        width: 410px;
-        border: 2px solid;
+        width: 440px;
+        background: var(--secondary-color);
         border-radius: 10px;
-        padding: 25px 35px;
+        padding: 40px 45px;
     }
 
     .wrapper h1 {
@@ -92,18 +92,18 @@ const SignupContainer = styled.div`
         border: 2px solid;
         border-radius: 10px;
         padding: 20px 45px 20px 20px;
-    }
 
-    .input-box input::placeholder {
-        
+        &::placeholder {
+            color: var(--placeholder-color);
+          }
     }
 
     .submit-button {
         width: 100%;
         height: 45px;
         outline: none;
-        background-color: transparent;
-        border: 2px solid;
+        background-color: var(--button-color);
+        border: 2px solid var(--button-color);
         border-radius: 10px;
         cursor: pointer;
         font-size: 16px;

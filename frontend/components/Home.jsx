@@ -59,7 +59,8 @@ const HomeContainer = styled.div`
     height: 100px;
     padding: 30px 25%;
     align-items: center;
-    border-bottom: 1px solid;
+    border-bottom: 2px solid;
+    background-color: var(--secondary-color);
   }
 
   .Button {
@@ -75,21 +76,22 @@ const HomeContainer = styled.div`
     cursor: pointer;
     transition: all 0.3s ease 0s;
     &:hover {
-
+      color: #0f2c85;
     }
   }
 
   .signup-button {
+    background: #556B2F;
     margin-left: 10px;
     font-weight: 600;
     font-size: 1rem;
     padding: 15px 15px;
-    border: 2px solid;
+    border: 2px solid #556B2F;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
     &:hover {
-
+      background: var(--hover-color);
     }
   }
   

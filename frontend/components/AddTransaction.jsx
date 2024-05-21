@@ -186,7 +186,7 @@ const AddContainer = styled.div`
         margin-bottom: 20px;
         font-size: 1rem;
         padding: 10px;
-        border: 1px solid;
+        border: 2px solid;
         border-radius: 5px;
         background-color: transparent;
         &::placeholder {
@@ -203,7 +203,7 @@ const AddContainer = styled.div`
         background-color: #191919;
         cursor: pointer;
         color: var(--placeholder-color);
-        border: 1px solid var(--text-color);
+        border: 2px solid var(--text-color);
     }
 
     form select option {
