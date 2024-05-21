@@ -1,6 +1,6 @@
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { User } from '../models/UserModel.js'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { User } from '../models/UserModel.js';
 
 export const signup = async (req, res) => {
     try {
@@ -63,7 +63,7 @@ export const login = async (req, res) => {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
         // Attach token to cookie
-        res.cookie('token', token, {httpOnly: true})
+        res.cookie('token', token, {httpOnly: true});
 
         return res.status(200).json({ status: true, message: 'Login successful' });
     } catch (error) {
@@ -94,17 +94,18 @@ export const verifyUser = async (req, res, next) => {
         req.user = user;
 
         // Go to next middleware
-        next()
+        next();
     } catch (error) {
         return res.status(500).json({ status: false, error: 'Server error' });
     }
 }
 
 export const authorizeUser = (req, res) => {
-    return res.status(200).json({ status: true, message: 'Authorized' })
+    // verifyUser is checked first
+    return res.status(200).json({ status: true, message: 'Authorized' });
 }
 
 export const logout = (req, res) => {
-    res.clearCookie('token')
-    return res.status(200).json({ status: true, message: "Logout successful" })
+    res.clearCookie('token');
+    return res.status(200).json({ status: true, message: "Logout successful" });
 }
