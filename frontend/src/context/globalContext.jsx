@@ -17,8 +17,10 @@ export const GlobalProvider = ({ children }) => {
         try {
             const response = await axios.post(`${TRANSACTION_BASE_URL}add-expense`, expense, { withCredentials: true });
             getExpenses();
+            return true;
         } catch (error) {
             setError(error.response.data.message);
+            return false;
         }
     }
 
@@ -35,8 +37,10 @@ export const GlobalProvider = ({ children }) => {
         try {
             const response = await axios.post(`${TRANSACTION_BASE_URL}add-income`, income, { withCredentials: true });
             getIncomes();
+            return true;
         } catch (error) {
             setError(error.response.data.message);
+            return false;
         }
     }
 

@@ -26,9 +26,4 @@ export const GlobalStyle = createGlobalStyle`
         background-color: var(--primary-color);
         min-height: 100vh;
     }
-
-    .custom-toast {
-        margin-top: 20rem;
-        margin-right: 20rem;
-    }
 `;

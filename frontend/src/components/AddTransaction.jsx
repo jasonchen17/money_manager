@@ -29,126 +29,134 @@ const AddTransaction = () => {
     const handleInput = name => e => {
         // Update input state
         setInputState({...inputState, [name]: e.target.value});
-
-        // Clear error message
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         // Prevent reload on submit
         e.preventDefault();
 
-        // Add transaction
+        let success;
+
         if (type === 'income') {
-            addIncome(inputState);
+            success = await addIncome(inputState);
         } else {
-            addExpense(inputState);
+            success = await addExpense(inputState);
         }
 
-        // clear input fields
-        setInputState({
-            title: '',
-            amount: '',
-            date: '',
-            category: '',
-            description: '',
-            type: ''
-        });
+        //  Clear input fields if successful submit
+        if (success) {
+            setInputState({
+                title: '',
+                amount: '',
+                date: '',
+                category: '',
+                type: ''
+            });
+            toast.success('Transaction added successfully');
+        }
     }
 
     useEffect(() => {
         getIncomes();
         getExpenses();
     }, []);
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            setError(null);
+        }
+    }, [error, setError]);
     
-  return (
-    <>
-        <Navigation />
-        <AddContainer>
-            <h1>Add Transaction</h1>
+    return (
+        <>
+            <Navigation />
+            <AddContainer>
+                <h1>Add Transaction</h1>
 
-            <div className="form-history-container">
-                <form onSubmit={handleSubmit}>
+                <div className="form-history-container">
+                    <form onSubmit={handleSubmit}>
 
-                    <select required value={type} name="type" id="type" onChange={handleInput('type')}>
-                        <option value="" disabled>Select Type</option>
-                        <option value="income">Income</option>
-                        <option value="expense">Expense</option>
-                    </select>
+                        <select value={type} name="type" id="type" onChange={handleInput('type')}>
+                            <option value="" disabled>Select Type</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
 
-                    <input
-                        type="text"
-                        value={title}
-                        name={'title'}
-                        placeholder="Title"
-                        onChange={handleInput('title')}
-                        autoComplete="off"
-                    /> 
+                        <input
+                            type="text"
+                            value={title}
+                            name={'title'}
+                            placeholder="Title"
+                            onChange={handleInput('title')}
+                            autoComplete="off"
+                        /> 
 
-                    <input
-                        type="text"
-                        value={amount}
-                        name={'amount'}
-                        placeholder="Amount"
-                        onChange={handleInput('amount')}
-                        autoComplete="off"
-                    />
+                        <input
+                            type="text"
+                            value={amount}
+                            name={'amount'}
+                            placeholder="Amount"
+                            onChange={handleInput('amount')}
+                            autoComplete="off"
+                        />
 
-                    <DatePicker
-                        className="date-picker"
-                        id='date'
-                        placeholderText='Select Date'
-                        selected={date}
-                        dateFormat='dd/MM/yyyy'
-                        onChange={(date) => {
-                            setInputState({...inputState, date: date});
-                        }}
-                        autoComplete="off"
-                    />
+                        <DatePicker
+                            className="date-picker"
+                            id='date'
+                            placeholderText='Select Date'
+                            selected={date}
+                            dateFormat='dd/MM/yyyy'
+                            onChange={(date) => {
+                                setInputState({...inputState, date: date});
+                            }}
+                            autoComplete="off"
+                        />
 
-                    <select required value ={category} name="category" id="category" onChange={handleInput('category')}>
-                        <option value="" disabled>Select Category</option>
-                        <option value="Food">Food</option>
-                        <option value="Transport">Transport</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Bills">Bills</option>
-                        <option value="Misc">Miscellaneous</option>
-                    </select>
+                        <select value ={category} name="category" id="category" onChange={handleInput('category')}>
+                            <option value="" disabled>Select Category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Misc">Miscellaneous</option>
+                        </select>
 
-                    <button type="submit">Add Transaction</button>
-                </form>
+                        <button type="submit">Add Transaction</button>
+                    </form>
 
-                <div className="history-container">
-                    <h2>Past 5 transactions</h2>
+                    <div className="history-container">
+                        <h2>Past 5 transactions</h2>
 
-                    <ul>
-                    {history.map((item) =>{
-                            const {_id, title, amount, type} = item;
-                            let amountText;
-                            let amountColor;
+                        <ul>
+                        {history.map((item) =>{
+                                const {_id, title, amount, type} = item;
+                                let amountText;
+                                let amountColor;
 
-                            if (type === 'expense') {
-                                amountText = `-$${amount <= 0 ? 0 : amount}`;
-                                amountColor = 'var(--expense-color)';
-                            } else {
-                                amountText = `+$${amount <= 0 ? 0 : amount}`;
-                                amountColor = 'var(--income-color)';
-                            }
-                            
-                            return (
-                                <li key={_id}>
-                                    <div>{title}</div>
-                                    <div style={{ color: amountColor }}>{amountText}</div>
-                                </li>
-                            )
-                    })}
-                    </ul>
+                                if (type === 'expense') {
+                                    amountText = `-$${amount <= 0 ? 0 : amount}`;
+                                    amountColor = 'var(--expense-color)';
+                                } else {
+                                    amountText = `+$${amount <= 0 ? 0 : amount}`;
+                                    amountColor = 'var(--income-color)';
+                                }
+                                
+                                return (
+                                    <li key={_id}>
+                                        <div>{title}</div>
+                                        <div style={{ color: amountColor }}>{amountText}</div>
+                                    </li>
+                                )
+                        })}
+                        </ul>
 
-                    <Link to="/transactions">View all transactions</Link>
+                        <Link to="/transactions">View all transactions</Link>
+                    </div>
                 </div>
-            </div>
-        </AddContainer>
-    </>
-  )
+            </AddContainer>
+        </>
+    )
 }
 
 const AddContainer = styled.div`
@@ -262,29 +270,6 @@ const AddContainer = styled.div`
       .history-container li div {
         margin: 0 20px;
       }
-
-    .error{
-        color: red;
-        animation: shake 0.5s ease-in-out;
-        @keyframes shake {
-            0%{
-                transform: translateX(0);
-            }
-            25%{
-                transform: translateX(10px);
-            }
-            50%{
-                transform: translateX(-10px);
-            }
-            75%{
-                transform: translateX(10px);
-            }
-            100%{
-                transform: translateX(0);
-            }
-        }
-    }
-
 `;
 
 export default AddTransaction;

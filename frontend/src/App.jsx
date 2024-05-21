@@ -11,8 +11,18 @@ function App() {
   return (
     <BrowserRouter>
       <Toaster
+        position="top-right"
         toastOptions={{
           className: 'custom-toast',
+          duration: 2000,
+          style: {
+            marginTop: '10px',
+            marginBottom: '10px'
+          }
+        }}
+        containerStyle={{
+          marginRight: '3rem',
+          marginTop: '3rem'
         }}
       />
       <Routes>
