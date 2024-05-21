@@ -13,8 +13,8 @@ const Navigation = () => {
           if (res.data.status) {
             navigate('/')
           }
-        }).catch(err => {
-          console.log(err)
+        }).catch(error => {
+          console.log(error)
         })
     }
 

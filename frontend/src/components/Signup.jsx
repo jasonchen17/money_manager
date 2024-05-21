@@ -20,8 +20,8 @@ const Signup = () => {
             if (response.data.status) {
                 navigate('/login')
             }
-        }).catch(err => {
-            console.log(err)
+        }).catch(error => {
+            console.log(error)
         })
     }
 

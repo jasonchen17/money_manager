@@ -33,7 +33,7 @@ app.use('/transactions', transactionRouter)
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Database Connected"))
-    .catch((err) => console.log("Database Connection Error", err))
+    .catch((error) => console.log("Database Connection Error", error))
 
 // Start server
 app.listen(process.env.PORT, () => (

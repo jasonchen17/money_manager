@@ -32,15 +32,15 @@ export const GlobalProvider = ({children}) => {
 
     const addExpense = async (income) => {
         const response = await axios.post(`${TRANSACTION_BASE_URL}add-expense`, income, {withCredentials: true})
-            .catch((err) =>{
-                setError(err.response.data.message)
+            .catch((error) =>{
+                setError(error.response.data.message)
             })
     }
 
     const addIncome = async (income) => {
         const response = await axios.post(`${TRANSACTION_BASE_URL}add-income`, income, {withCredentials: true})
-            .catch((err) =>{
-                setError(err.response.data.message)
+            .catch((error) =>{
+                setError(error.response.data.message)
             })
     }
 
@@ -55,15 +55,15 @@ export const GlobalProvider = ({children}) => {
 
     const deleteIncome = async (id) => {
         const response = await axios.delete(`${TRANSACTION_BASE_URL}delete-income/${id}`)
-            .catch((err) =>{
-                setError(err.response.data.message)
+            .catch((error) =>{
+                setError(error.response.data.message)
             })
     }
 
     const deleteExpense = async (id) => {
         const response = await axios.delete(`${TRANSACTION_BASE_URL}delete-expense/${id}`)
-            .catch((err) =>{
-                setError(err.response.data.message)
+            .catch((error) =>{
+                setError(error.response.data.message)
             })
     }
 

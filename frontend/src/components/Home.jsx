@@ -15,8 +15,8 @@ const Home = () => {
         } else {
           navigate('/login')
         }
-      }).catch(err => {
-        console.log(err)
+      }).catch(error => {
+        console.log(error)
       })
   }
 
@@ -28,8 +28,8 @@ const Home = () => {
         } else {
           navigate('/signup')
         }
-      }).catch(err => {
-        console.log(err)
+      }).catch(error => {
+        console.log(error)
       })
   }
 

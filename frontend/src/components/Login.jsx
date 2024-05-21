@@ -19,7 +19,7 @@ const Login = () => {
             if (response.data.status) {
                 navigate('/dashboard')
             }
-        }).catch(err => {
+        }).catch(error => {
             console.log(error)
         })
     }
