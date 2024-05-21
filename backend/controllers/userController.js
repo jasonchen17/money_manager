@@ -4,57 +4,59 @@ import { User } from '../models/UserModel.js'
 
 export const signup = async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+        // Get user data from request body
+        const { name, email, password } = req.body;
 
-      // Check for empty fields
-      if (!name || !email || !password) {
-        return res.status(400).json({ error: 'Please provide all required fields' });
-      }
-  
-      // Check if user already exists using email
-      const user = await User.findOne({ email });
-      if (user) {
-        return res.status(409).json({ error: 'User already exists' });
-      }
-  
-      // Hash password
-      const hashedPassword = await bcrypt.hash(password, 10);
+        // Check for empty fields
+        if (!name || !email || !password) {
+        return res.status(400).json({ status: false, error: 'Please provide all required fields' });
+        }
 
-      // Create new user
-      const newUser = new User({
+        // Check if user already exists using email
+        const user = await User.findOne({ email });
+        if (user) {
+        return res.status(400).json({ status: false, error: 'User already exists' });
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create new user
+        const newUser = new User({
         name,
         email,
         password: hashedPassword
-      });
+        });
 
-      // Save user to database
-      await newUser.save();
+        // Save user to database
+        await newUser.save();
 
-      res.status(201).json({ message: 'User created' });
+        res.status(200).json({ status: true, message: 'User created' });
     } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ status: false, error: 'Server error' });
     }
 };
 
 export const login = async (req, res) => {
     try {
+        // Get user data from request body
         const { email, password } = req.body;
 
         // Check for empty fields
         if (!email || !password) {
-            return res.status(400).json({ error: 'Please provide all required fields' });
+            return res.status(400).json({ status: false, error: 'Please provide all required fields' });
         }
 
         // Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ error: 'User does not exist' });
+            return res.status(400).json({ status: false, error: 'User does not exist' });
         }
 
         // Check if password is correct
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-          return res.status(401).json({ error: 'Invalid password' });
+          return res.status(400).json({ status: false, error: 'Invalid password' });
         }
 
         // Create and sign token
@@ -63,40 +65,46 @@ export const login = async (req, res) => {
         // Attach token to cookie
         res.cookie('token', token, {httpOnly: true})
 
-        return res.status(200).json({ message: 'Login successful' });
+        return res.status(200).json({ status: true, message: 'Login successful' });
     } catch (error) {
-        return res.status(500).json({ error: 'Server error' });
+        return res.status(500).json({ status: false, error: 'Server error' });
     }
 };
 
 export const verifyUser = async (req, res, next) => {
     try {
+        // Get token from cookie
         const token = req.cookies.token;
 
+        // Check if token exists
         if (!token) {
-            return res.status(401).json({ message: "No token provided" });
+            return res.status(400).json({ status: false, message: "No token" });
         }
 
+        // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const user = await User.findOne({name: decoded.name});
+        // Check if user exists
+        const user = await User.findById(decoded.userId);
         if (!user) {
-            return res.json({status: false, message: "no user"});
+            return res.status(400).json({ status: false, message: "User not found" });
         }
 
-        // Attach user to request
+        // Attach user to request object
         req.user = user;
+
+        // Go to next middleware
         next()
-    } catch (err) {
-        return res.json(err);
+    } catch (error) {
+        return res.status(500).json({ status: false, error: 'Server error' });
     }
 }
 
-export const verifyToken = (req, res) => {
-    return res.json({status: true, message: 'authorized'})
+export const authorizeUser = (req, res) => {
+    return res.status(200).json({ status: true, message: 'Authorized' })
 }
 
 export const logout = (req, res) => {
     res.clearCookie('token')
-    return res.json({status: true})
+    return res.status(200).json({ status: true, message: "Logout successful" })
 }
