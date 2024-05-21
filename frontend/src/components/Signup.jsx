@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Signup = () => {
-    const [username, setUsername] = useState("")
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -13,7 +13,7 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         Axios.post("http://localhost:3000/users/signup", {
-            username,
+            name,
             email,
             password
         }).then(response => {
@@ -21,7 +21,7 @@ const Signup = () => {
                 navigate('/login')
             }
         }).catch(err => {
-            console.log(error)
+            console.log(err)
         })
     }
 
@@ -32,8 +32,8 @@ const Signup = () => {
                 <div className='input-box'>
                     <input
                         type="text"
-                        placeholder='Username'
-                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder='Name'
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
                 <div className='input-box'>

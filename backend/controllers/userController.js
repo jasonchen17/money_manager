@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { User } from '../models/UserModel.js'
 
 export const signup = async (req, res) => {
-    const { username, email, password } = req.body
+    const { name, email, password } = req.body
     const user = await User.findOne({email})
     if (user) {
         return res.json({error: 'User already exists'})
@@ -11,7 +11,7 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = new User({
-        username,
+        name,
         email,
         password: hashedPassword,
     })
@@ -30,7 +30,7 @@ export const login = async (req, res) => {
         return res.json({error: 'Incorrect password'})
     }
 
-    const token = jwt.sign({username: user.username}, process.env.KEY)
+    const token = jwt.sign({name: user.name}, process.env.KEY)
     res.cookie('token', token, {httpOnly: true})
     return res.json({status: true, message: 'login successful'})
 }
@@ -43,7 +43,7 @@ export const verifyUser = async (req, res, next) => {
         }
         const decoded = jwt.verify(token, process.env.KEY);
 
-        const user = await User.findOne({username: decoded.username});
+        const user = await User.findOne({name: decoded.name});
         if (!user) {
             return res.json({status: false, message: "no user"});
         }
