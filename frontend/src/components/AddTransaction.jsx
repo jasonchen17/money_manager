@@ -120,9 +120,18 @@ const AddTransaction = () => {
                             <option value="" disabled>Select Category</option>
                             <option value="Food">Food</option>
                             <option value="Transport">Transport</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Bills">Bills</option>
-                            <option value="Misc">Miscellaneous</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Personal Care">Personal Care</option>
+                            <option value="Gifts">Gifts</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Savings">Savings</option>
+                            <option value="Investments">Investments</option>
+                            <option value="Debt Payments">Debt Payments</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
                         </select>
 
                         <button type="submit">Add Transaction</button>
