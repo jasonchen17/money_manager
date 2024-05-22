@@ -80,7 +80,7 @@ const HistoryContainer = styled.div`
     top: 50%;
     transform: translateY(-50%);
     width: 2164px;
-    border: 1px solid;
+    border: 2px solid;
     border-radius: 10px;
     background-color: var(--secondary-color);
 

@@ -61,7 +61,7 @@ const NavStyled = styled.div`
     transform: translateY(-50%);
     position: fixed;
     padding: 30px 0px;
-    border: 1px solid;
+    border: 2px solid;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;

@@ -168,7 +168,7 @@ const AddContainer = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    border: 1px solid;
+    border: 2px solid;
     height: 77rem;
     position: absolute;
     top: 50%;
