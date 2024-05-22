@@ -86,7 +86,7 @@ export const addIncome = async (req, res) => {
 
         await income.save();
 
-        return res.status(200).json({ status: false, message: 'Income added' });
+        return res.status(200).json({ status: true, message: 'Income added' });
     } catch (error) {
         return res.status(500).json({ status: false, message: 'Server error' });
     }
