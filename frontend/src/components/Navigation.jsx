@@ -1,23 +1,22 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
-import axios from 'axios'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useGlobalContext } from '../context/globalContext';
+import { toast } from 'react-hot-toast';
+
 
 const Navigation = () => {
-    const navigate = useNavigate()
+    const { logout } = useGlobalContext();
+    const navigate = useNavigate();
 
-    axios.defaults.withCredentials = true;
-    const handleLogout = () => {
-        axios.get('http://localhost:3000/users/logout')
-        .then(res => {
-          if (res.data.status) {
-            navigate('/')
-          }
-        }).catch(error => {
-          console.log(error)
-        })
+    const handleLogout = async () => {
+        const success = await logout();
+
+        if (success) {
+            toast.success('Logged out successfully');
+            navigate('/');
+        }
     }
-
     return (
         <NavStyled>
             <div>
@@ -25,15 +24,18 @@ const Navigation = () => {
                 <i className="fa-solid fa-circle-user"></i>
                     <h2>Jason Chen</h2>
                 </div>
+
                 <ul className="menu-items">
                     <li onClick={() => navigate('/dashboard')}>
                         <i className="fa-solid fa-chart-line"></i>
                         <span>Dashboard</span>
                     </li>
+
                     <li onClick={() => navigate('/transactions')}>
                         <i className="fa-solid fa-credit-card"></i>
                         <span>Transactions</span>
                     </li>
+                    
                     <li onClick={() => navigate('/add-transaction')}>
                         <i className="fa-solid fa-money-bill-transfer"></i>
                         <span>Add Transaction</span>
