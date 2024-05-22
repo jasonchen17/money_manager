@@ -102,7 +102,7 @@ export const verifyUser = async (req, res, next) => {
 
 export const authorizeUser = (req, res) => {
     // verifyUser is checked first
-    return res.status(200).json({ status: true, message: 'Authorized' });
+    return res.status(200).json({ status: true, message: 'Authorized', user: req.user});
 }
 
 export const logout = (req, res) => {

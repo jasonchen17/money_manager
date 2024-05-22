@@ -92,10 +92,12 @@ export const GlobalProvider = ({ children }) => {
 
     const getUser = async () => {
         try {
-            const response = await axios.get(`${USER_BASE_URL}get-user`, { withCredentials: true });
-            setUser(response.data);
+            const response = await axios.get(`${USER_BASE_URL}verify`, { withCredentials: true });
+            setUser(response.data.user);
+            return true;
         } catch (error) {
             setError(error.response.data.message);
+            return false;
         }
     }
 
@@ -142,7 +144,8 @@ export const GlobalProvider = ({ children }) => {
             totalIncome,
             totalBalance,
             signup,
-            login
+            login,
+            getUser
         }}> 
             {children}
         </GlobalContext.Provider>

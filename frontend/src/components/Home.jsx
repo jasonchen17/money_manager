@@ -1,46 +1,41 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import styled from 'styled-components'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useGlobalContext } from '../context/globalContext';
 
 const Home = () => {
-  const navigate = useNavigate()
-  axios.defaults.withCredentials = true;
+  const navigate = useNavigate();
+  
+  const { getUser } = useGlobalContext();
 
-  const handleLogin = () => {
-    axios.get('http://localhost:3000/users/verify')
-      .then(response => {
-        // adding else statement here does not work because res returns error before status
-        if (response.data.status) {
-          navigate('/dashboard')
-        }
-      }).catch(error => {
-        navigate('/login')
-        console.log(error)
-      })
+  const handleLogin = async () => {
+    const success = await getUser();
+
+    if (success) {
+        navigate('/dashboard');
+    } else {
+        navigate('/login');
+    }
   }
 
-  const handleSignup = () => {
-    axios.get('http://localhost:3000/users/verify')
-      .then(response => {
-        if (response.data.status) {
-          navigate('/dashboard')
-        }
-      }).catch(error => {
-        navigate('/signup')
-        console.log(error)
-      })
+  const handleSignup = async () => {
+    const success = await getUser();
+    if (success) {
+        navigate('/dashboard');
+    } else {
+        navigate('/signup');
+    }
   }
-
-
   return (
     <HomeContainer>
       <div className="NavBar">
-        <h1>Welcome</h1>
+        <h1>Expense Tracker</h1>
+
         <div className="Button">
           <div className="login-button" onClick={handleLogin}>
             Log In
           </div>
+
           <div className="signup-button" onClick={handleSignup}>
             Sign Up
           </div>
@@ -96,4 +91,4 @@ const HomeContainer = styled.div`
   
 `;
 
-export default Home
+export default Home;
