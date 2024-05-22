@@ -9,13 +9,13 @@ export const signup = async (req, res) => {
 
         // Check for empty fields
         if (!name || !email || !password) {
-        return res.status(400).json({ status: false, error: 'Please provide all required fields' });
+            return res.status(400).json({ status: false, message: 'Please provide all required fields' });
         }
 
         // Check if user already exists using email
         const user = await User.findOne({ email });
         if (user) {
-        return res.status(400).json({ status: false, error: 'User already exists' });
+            return res.status(400).json({ status: false, message: 'User already exists' });
         }
 
         // Hash password
@@ -23,17 +23,17 @@ export const signup = async (req, res) => {
 
         // Create new user
         const newUser = new User({
-        name,
-        email,
-        password: hashedPassword
+            name,
+            email,
+            password: hashedPassword
         });
 
         // Save user to database
         await newUser.save();
 
-        res.status(200).json({ status: true, message: 'User created' });
+        return res.status(200).json({ status: true, message: 'User created' });
     } catch (error) {
-        res.status(500).json({ status: false, error: 'Server error' });
+        return res.status(500).json({ status: false, message: 'Server error' });
     }
 };
 
@@ -44,19 +44,19 @@ export const login = async (req, res) => {
 
         // Check for empty fields
         if (!email || !password) {
-            return res.status(400).json({ status: false, error: 'Please provide all required fields' });
+            return res.status(400).json({ status: false, message: 'Please provide all required fields' });
         }
 
         // Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ status: false, error: 'User does not exist' });
+            return res.status(400).json({ status: false, message: 'User does not exist' });
         }
 
         // Check if password is correct
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-          return res.status(400).json({ status: false, error: 'Invalid password' });
+          return res.status(400).json({ status: false, message: 'Invalid password' });
         }
 
         // Create and sign token
@@ -67,7 +67,7 @@ export const login = async (req, res) => {
 
         return res.status(200).json({ status: true, message: 'Login successful' });
     } catch (error) {
-        return res.status(500).json({ status: false, error: 'Server error' });
+        return res.status(500).json({ status: false, message: 'Server error' });
     }
 };
 
@@ -96,7 +96,7 @@ export const verifyUser = async (req, res, next) => {
         // Go to next middleware
         next();
     } catch (error) {
-        return res.status(500).json({ status: false, error: 'Server error' });
+        return res.status(500).json({ status: false, message: 'Server error' });
     }
 }
 
