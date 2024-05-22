@@ -142,6 +142,7 @@ export const GlobalProvider = ({ children }) => {
             totalIncome,
             totalBalance,
             signup,
+            login
         }}> 
             {children}
         </GlobalContext.Provider>
