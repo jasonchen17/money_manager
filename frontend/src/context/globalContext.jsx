@@ -54,7 +54,15 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-    const transactionHistory = () => {
+    const getTransactionHistoryByCreatedAtDesc = () => {
+        const history = [...incomes, ...expenses];
+        history.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        return history;
+    }
+
+    const getTransactionHistorySortedByDateDesc = () => {
         // Combine incomes and expenses into a single array
         const history = [...incomes, ...expenses];
 
@@ -148,7 +156,7 @@ export const GlobalProvider = ({ children }) => {
             getExpenses,
             addIncome,
             getIncomes,
-            transactionHistory,
+            getTransactionHistorySortedByDateDesc,
             deleteIncome,
             deleteExpense,
             totalExpense,
@@ -157,7 +165,8 @@ export const GlobalProvider = ({ children }) => {
             signup,
             login,
             getUser,
-            logout
+            logout,
+            getTransactionHistoryByCreatedAtDesc
         }}> 
             {children}
         </GlobalContext.Provider>

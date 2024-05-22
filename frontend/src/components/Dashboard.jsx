@@ -11,9 +11,9 @@ import axios from 'axios';
 const Dashboard = () => {
   axios.defaults.withCredentials = true;
 
-  const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, transactionHistory } = useGlobalContext();
+  const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, getTransactionHistorySortedByDateDesc } = useGlobalContext();
 
-  const history = transactionHistory();
+  const history = getTransactionHistorySortedByDateDesc();
   const slicedHistory = history.slice(0, 5);
 
   const chartData = {

@@ -8,9 +8,9 @@ import { format } from 'date-fns';
 const Transactions = () => {
     axios.defaults.withCredentials = true;
 
-    const {transactionHistory, getIncomes, getExpenses, deleteExpense, deleteIncome } = useGlobalContext();
+    const {getTransactionHistorySortedByDateDesc, getIncomes, getExpenses, deleteExpense, deleteIncome } = useGlobalContext();
 
-    const [...history] = transactionHistory();
+    const [...history] = getTransactionHistorySortedByDateDesc();
 
     const handleDelete = (id, type) => {
         if (type === 'expense') {

@@ -12,7 +12,7 @@ const AddTransaction = () => {
     axios.defaults.withCredentials = true;
     
     const {
-        addExpense, addIncome, getIncomes, getExpenses, transactionHistory, error, setError
+        addExpense, addIncome, getIncomes, getExpenses, getTransactionHistoryByCreatedAtDesc, error, setError
     } = useGlobalContext();
 
     const [inputState, setInputState] = useState({
@@ -27,7 +27,7 @@ const AddTransaction = () => {
     const {title, amount, date, category, type} = inputState;
 
     // Get the last 5 transactions
-    const [...history] = transactionHistory().slice(0, 5);
+    const [...history] = getTransactionHistoryByCreatedAtDesc().sort().slice(0, 5);
 
     const handleInput = name => e => {
         // Update input state
@@ -138,7 +138,7 @@ const AddTransaction = () => {
                     </form>
 
                     <div className="history-container">
-                        <h2>Past 5 transactions</h2>
+                        <h2>Recently added</h2>
 
                         <ul>
                         {history.map((item) =>{
