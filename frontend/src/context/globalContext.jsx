@@ -12,7 +12,7 @@ export const GlobalProvider = ({ children }) => {
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [error, setError] = useState(null);
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState(null);
 
     const addExpense = async (expense) => {
         try {
@@ -123,6 +123,17 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
+    const logout = async () => {
+        try {
+            const response = await axios.get(`${USER_BASE_URL}logout`, { withCredentials: true });
+            setUser(null);
+            return true;
+        } catch (error) {
+            setError(error.response.data.message);
+            return false;
+        }
+    }
+
     return (
         <GlobalContext.Provider value={{
             incomes,
@@ -145,7 +156,8 @@ export const GlobalProvider = ({ children }) => {
             totalBalance,
             signup,
             login,
-            getUser
+            getUser,
+            logout
         }}> 
             {children}
         </GlobalContext.Provider>

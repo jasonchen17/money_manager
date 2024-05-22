@@ -6,24 +6,27 @@ import { useGlobalContext } from '../context/globalContext';
 const Home = () => {
   const navigate = useNavigate();
   
-  const { getUser } = useGlobalContext();
+  const { getUser, setError } = useGlobalContext();
 
   const handleLogin = async () => {
     const success = await getUser();
 
     if (success) {
-        navigate('/dashboard');
+      navigate('/dashboard');
     } else {
-        navigate('/login');
+      setError(null);
+      navigate('/login');
     }
   }
 
   const handleSignup = async () => {
     const success = await getUser();
+    
     if (success) {
-        navigate('/dashboard');
+      navigate('/dashboard');
     } else {
-        navigate('/signup');
+      setError(null);
+      navigate('/signup');
     }
   }
   return (
