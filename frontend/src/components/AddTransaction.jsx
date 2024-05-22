@@ -31,7 +31,7 @@ const AddTransaction = () => {
         setInputState({...inputState, [name]: e.target.value});
     }
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         // Prevent reload on submit
         e.preventDefault();
 

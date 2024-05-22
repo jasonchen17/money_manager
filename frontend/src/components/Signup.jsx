@@ -1,57 +1,82 @@
-import React, { useState } from 'react';
-import Axios from 'axios'
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { useGlobalContext } from '../context/globalContext';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const { error, setError, signup } = useGlobalContext();
 
-    const navigate = useNavigate()
+    const [inputState, setInputState] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        Axios.post("http://localhost:3000/users/signup", {
-            name,
-            email,
-            password
-        }).then(response => {
-            if (response.data.status) {
-                navigate('/login')
-            }
-        }).catch(error => {
-            console.log(error)
-        })
+    const navigate = useNavigate();
+
+    const {name, email, password} = inputState;
+
+    const handleInput = name => e => {
+        setInputState({...inputState, [name]: e.target.value});
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const success = await signup(inputState);
+
+        if (success) {
+            toast.success('Account created successfully');
+            navigate('/login');
+        }
+    }
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            setError(null);
+        }
+    }, [error, setError]);
     return (
         <SignupContainer>
             <form className='wrapper' onSubmit={handleSubmit}>
                 <h1>Sign Up</h1>
+
                 <div className='input-box'>
                     <input
                         type="text"
                         placeholder='Name'
-                        onChange={(e) => setName(e.target.value)}
+                        name={'title'}
+                        value={name}
+                        onChange={handleInput('name')}
+                        autoComplete='off'
                     />
                 </div>
+
                 <div className='input-box'>
                     <input
                         type="email"
                         autoComplete='off'
                         placeholder='Email'
-                        onChange={(e) => setEmail(e.target.value)}
+                        name={'email'}
+                        value={email}
+                        onChange={handleInput('email')}
                     />
                 </div>
+
                 <div className='input-box'>
                     <input
                         type="password"
                         placeholder='Password'
-                        onChange={(e) => setPassword(e.target.value)}
+                        name={'password'}
+                        value={password}
+                        onChange={handleInput('password')}
                     />
                 </div>
+
                 <button type="submit" className="submit-button">Sign Up</button>
+
                 <div className="register">
                     <p>Have an account? <Link to="/login">Log In</Link></p>
                 </div>
@@ -126,4 +151,4 @@ const SignupContainer = styled.div`
     }
 `;
 
-export default Signup
+export default Signup;
