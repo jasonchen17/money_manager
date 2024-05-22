@@ -6,8 +6,11 @@ import DatePicker from 'react-datepicker';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 const AddTransaction = () => {
+    axios.defaults.withCredentials = true;
+    
     const {
         addExpense, addIncome, getIncomes, getExpenses, transactionHistory, error, setError
     } = useGlobalContext();

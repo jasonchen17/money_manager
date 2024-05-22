@@ -6,8 +6,10 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { format } from 'date-fns';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Dashboard = () => {
+  axios.defaults.withCredentials = true;
 
   const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, transactionHistory } = useGlobalContext();
 
