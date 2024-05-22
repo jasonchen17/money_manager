@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useGlobalContext } from '../context/globalContext';
@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 
 
 const Navigation = () => {
-    const { logout } = useGlobalContext();
+    const { logout, getUser, user } = useGlobalContext();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -17,12 +17,17 @@ const Navigation = () => {
             navigate('/');
         }
     }
+
+    useEffect(() => {
+        getUser();
+    }, []);
     return (
         <NavStyled>
             <div>
                 <div className="user">
                 <i className="fa-solid fa-circle-user"></i>
-                    <h2>Jason Chen</h2>
+                    {/* name is null if not name is not loaded yet*/}
+                    <h2>{user ? user.name: null}</h2>
                 </div>
 
                 <ul className="menu-items">

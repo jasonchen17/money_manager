@@ -59,6 +59,9 @@ const AddTransaction = () => {
     useEffect(() => {
         getIncomes();
         getExpenses();
+
+        // In case of no token error
+        setError(null);
     }, []);
 
     useEffect(() => {
