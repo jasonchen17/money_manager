@@ -62,13 +62,11 @@ const AddTransaction = () => {
     useEffect(() => {
         getIncomes();
         getExpenses();
-
-        // In case of no token error
-        setError(null);
     }, []);
 
     useEffect(() => {
-        if (error) {
+        // No token error not sure what the cause is
+        if (error && error !== 'no token') {
             toast.error(error);
             setError(null);
         }
@@ -182,6 +180,7 @@ const AddContainer = styled.div`
     border-radius: 10px;
     width: 2164px;
     background-color: var(--secondary-color);
+    padding-left: 40px;
 
     h1 {
         align-self: flex-start;

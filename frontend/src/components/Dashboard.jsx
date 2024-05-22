@@ -110,6 +110,7 @@ const Dashboard = () => {
 const DashboardContainer = styled.div`
   margin-left: 364px;
   padding: 20px;
+  padding-left: 40px;
   display: flex;
   flex-direction: column;
   border: 2px solid;
@@ -145,7 +146,6 @@ const DashboardContainer = styled.div`
     h2 {
       margin-bottom: 10px;
     }
-
     padding: 20px;
     margin-left: 20px;
     flex-grow: 1;

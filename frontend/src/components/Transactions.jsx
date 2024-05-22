@@ -71,6 +71,7 @@ const Transactions = () => {
 
 const HistoryContainer = styled.div`
     padding: 20px;
+    padding-left: 40px;
     display: flex;
     flex-direction: column;
     margin-left: 364px;
