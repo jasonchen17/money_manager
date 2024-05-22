@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [error, setError] = useState(null);
+    const [user, setUser] = useState([]);
 
     const addExpense = async (expense) => {
         try {
@@ -89,6 +90,37 @@ export const GlobalProvider = ({ children }) => {
 
     const totalBalance = totalIncome - totalExpense;
 
+    const getUser = async () => {
+        try {
+            const response = await axios.get(`${USER_BASE_URL}get-user`, { withCredentials: true });
+            setUser(response.data);
+        } catch (error) {
+            setError(error.response.data.message);
+        }
+    }
+
+    const signup = async (userData) => {
+        try {
+            const response = await axios.post(`${USER_BASE_URL}signup`, userData, { withCredentials: true });
+            getUser();
+            return true;
+        } catch (error) {
+            setError(error.response.data.message);
+            return false;
+        }
+    }
+
+    const login = async (userData) => {
+        try {
+            const response = await axios.post(`${USER_BASE_URL}login`, userData, { withCredentials: true });
+            getUser();
+            return true;
+        } catch (error) {
+            setError(error.response.data.message);
+            return false;
+        }
+    }
+
     return (
         <GlobalContext.Provider value={{
             incomes,
@@ -97,6 +129,8 @@ export const GlobalProvider = ({ children }) => {
             setExpenses,
             error,
             setError,
+            user,
+            setUser,
             addExpense,
             getExpenses,
             addIncome,
@@ -106,7 +140,8 @@ export const GlobalProvider = ({ children }) => {
             deleteExpense,
             totalExpense,
             totalIncome,
-            totalBalance
+            totalBalance,
+            signup,
         }}> 
             {children}
         </GlobalContext.Provider>
