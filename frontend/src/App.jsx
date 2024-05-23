@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import AddTransaction from "./components/AddTransaction";
 import Transactions from "./components/Transactions";
 import { Toaster } from 'react-hot-toast';
+import Chart from "./components/Chart";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/add-transaction" element={<AddTransaction />}></Route>
         <Route path="/transactions" element={<Transactions />}></Route>
+        <Route path="/chart" element={<Chart />}></Route>
       </Routes>
     </BrowserRouter>
   )
