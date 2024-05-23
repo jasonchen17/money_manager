@@ -4,22 +4,63 @@ import { useGlobalContext } from '../context/globalContext';
 import Navigation from './Navigation';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { format } from 'date-fns';
+import { format, parseISO, subDays, parse, addDays } from 'date-fns';
 import styled from 'styled-components';
 import axios from 'axios';
+import {
+  ResponsiveContainer,
+  AreaChart,
+  XAxis,
+  YAxis,
+  Area,
+  Tooltip,
+  CartesianGrid
+} from 'recharts';
 
 const Dashboard = () => {
   axios.defaults.withCredentials = true;
 
-  const { totalIncome, getIncomes, getExpenses, totalExpense, incomes, expenses, getTransactionHistorySortedByDateDesc } = useGlobalContext();
+  const { totalIncome, getIncomes, getExpenses, totalExpense, getTransactionHistorySortedByDateDesc } = useGlobalContext();
 
-  const history = getTransactionHistorySortedByDateDesc();
+  const [...history] = getTransactionHistorySortedByDateDesc().reverse();
   const slicedHistory = history.slice(0, 5);
 
-  const chartData = {
-    datasets: [
+  const data = [];
+  let start;
+  let end;
+  history.forEach((transaction) => {
+      if (!start) {
+          start = new Date(transaction.date);
+      }
+      end = new Date(transaction.date);
+  });
 
-    ]
+
+  let totalIncomee = 0;
+  let totalExpensee = 0;
+  let totalBalancee = 0;
+  for (let cur = start; cur <= addDays(end, 1); cur = addDays(cur, 1)) {
+      // let totalIncome = 0;
+      // let totalExpense = 0;
+      history.forEach((transaction) => {
+          const { amount, type, date } = transaction;
+          const temp = format(new Date(date), "MM-dd-yyyy");
+          if (temp === format(cur, 'MM-dd-yyyy')) {
+              if (type === 'income') {
+                  totalIncomee += amount;
+                  totalBalancee += amount;
+              } else if (type === 'expense') {
+                  totalExpensee += amount;
+                  totalBalancee -= amount;
+              }
+          }
+      });
+      data.push({
+          date: format(cur, 'MM-dd-yyyy'),
+          totalBalancee,
+          totalIncomee,
+          totalExpensee
+      });
   }
 
   useEffect(() => {
@@ -34,29 +75,30 @@ const Dashboard = () => {
 
         <div className="chart-history-container">
           <div className="chart-container">
-          <Line
-            data={chartData}
-            options={{
-              scales: {
-                x: {
-                  grid: {
-                    color: '#6b6b6b',
-                  },
-                  ticks: {
-                    color: '#6b6b6b',
-                  },
-                },
-                y: {
-                  grid: {
-                    color: '#6b6b6b',
-                  },
-                  ticks: {
-                    color: '#6b6b6b',
-                  },
-                },
-              },
-            }}
-          />
+          <ResponsiveContainer className="Res" > 
+        <AreaChart className="cool" data={data}> <defs> 
+            <linearGradient id="color" x1="0" y1="0" x2="0" y2="1"> 
+            <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} /> 
+            <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} /> 
+            </linearGradient> </defs> 
+            {/* <Area type="monotone" dataKey="totalIncome" stroke="#2451B7" fill="url(#color)">
+                </Area> 
+                <Area type="monotone" dataKey="totalExpense" stroke="#ad31B7" fill="url(#color)">
+                    </Area>  */}
+                    <Area type="monotone" dataKey="totalBalancee" stroke="#2451B7" fill="url(#color)" />
+                    <XAxis dataKey="date" axisLine={false} tickLine={false} tickFormatter={(date) => { if (format(date, 'd') % 7 === 0) { return format(date, 'MMM, d'); } else { return ''; } }} /> 
+                    <YAxis dataKey="totalIncomee" axisLine={false} tickLine={false} tickCount={8} tickFormatter={(number) => `$${number}`}/> 
+
+
+
+
+
+                    <Tooltip content={CustomTooltip}/> <CartesianGrid opacity={0.1} vertical={false}/> 
+                    
+                    
+                    
+                    </AreaChart> 
+                    </ResponsiveContainer>
           </div>
 
           <div className="history-container">
@@ -107,6 +149,25 @@ const Dashboard = () => {
   )
 }
 
+function CustomTooltip({ active, payload, label }) {
+  if (active) {
+      return (
+          <div className="tooltip">
+              <h4>{format(label, "eeee, d MMM, yyyy")}</h4>
+              <p>
+                  <strong>Total Balance: </strong> ${payload[0].value}
+              </p>
+              <p>
+                  <strong>Total Income: </strong> ${payload[0].payload.totalIncomee}
+              </p>
+              <p>
+                  <strong>Total Expense: </strong> ${payload[0].payload.totalExpensee}
+              </p>
+          </div>
+      );
+  }
+}
+
 const DashboardContainer = styled.div`
   margin-left: 364px;
   padding: 20px;
@@ -136,9 +197,10 @@ const DashboardContainer = styled.div`
     border-radius: 10px;
     border: 2px solid;
     width: 85rem;
+    padding: 30px;
   }
 
- .chart-container canvas {
+  .cool {
     padding: 20px;
   }
 
