@@ -25,7 +25,7 @@ const Navigation = () => {
         <NavStyled>
             <div>
                 <div className="user">
-                <i className="fa-solid fa-circle-user"></i>
+                    <i className="fa-solid fa-circle-user"></i>
                     {/* name is null if not name is not loaded yet*/}
                     <h2>{user ? user.name: null}</h2>
                 </div>
@@ -114,7 +114,6 @@ const NavStyled = styled.div`
     ul li:hover {
         background: var(--hover-color);
     }
-
 `;
 
 export default Navigation

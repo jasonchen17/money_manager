@@ -8,33 +8,34 @@ import Transactions from "./components/Transactions";
 import { Toaster } from 'react-hot-toast';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          className: 'custom-toast',
-          duration: 2000,
-          style: {
-            marginTop: '10px',
-            marginBottom: '10px'
-          }
-        }}
-        containerStyle={{
-          marginRight: '3rem',
-          marginTop: '3rem'
-        }}
-      />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/add-transaction" element={<AddTransaction />}></Route>
-        <Route path="/transactions" element={<Transactions />}></Route>
-      </Routes>
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <Toaster
+                position="top-right"
+                toastOptions={{
+                    className: 'custom-toast',
+                    duration: 2000,
+                    style: {
+                    marginTop: '10px',
+                    marginBottom: '10px'
+                    }
+                }}
+                containerStyle={{
+                    marginRight: '3rem',
+                    marginTop: '3rem'
+                }}
+            />
+
+            <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/signup" element={<Signup />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/dashboard" element={<Dashboard />}></Route>
+                <Route path="/add-transaction" element={<AddTransaction />}></Route>
+                <Route path="/transactions" element={<Transactions />}></Route>
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App;

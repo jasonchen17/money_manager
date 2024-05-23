@@ -26,45 +26,46 @@ const Transactions = () => {
     }, [deleteExpense, deleteIncome]);
     return (
         <>
-        <Navigation />
-        <HistoryContainer>
-            <h1>Transaction History</h1>
-            <ul>
-                <li className="list-header">
-                    <div>Date</div>
-                    <div>Title</div>
-                    <div>Category</div>
-                    <div>Amount</div>
-                    <div className="edit-header"><i className="fa-solid fa-trash"></i></div>
-                </li>
+            <Navigation />
+            <HistoryContainer>
+                <h1>Transaction History</h1>
 
-                {history.map((item) =>{
-                        const {_id, title, amount, type, date, category} = item;
-                        let amountText;
-                        let amountColor;
+                <ul>
+                    <li className="list-header">
+                        <div>Date</div>
+                        <div>Title</div>
+                        <div>Category</div>
+                        <div>Amount</div>
+                        <div className="edit-header"><i className="fa-solid fa-trash"></i></div>
+                    </li>
 
-                        if (type === 'expense') {
-                            amountText = `-$${amount <= 0 ? 0 : amount}`;
-                            amountColor = 'var(--expense-color)';
-                        } else {
-                            amountText = `+$${amount <= 0 ? 0 : amount}`;
-                            amountColor = 'var(--income-color)';
-                        }
-                        
-                        return (
-                            <li key={_id}>
-                                <div>{format(new Date(date), 'MM/dd/yyyy')}</div>
-                                <div>{title}</div>
-                                <div>{category}</div>
-                                <div style={{ color: amountColor }}>{amountText}</div>
-                                <div className="edit" onClick={() => handleDelete(_id, type)}>
-                                    <i className="fa-solid fa-trash"></i>
-                                </div>
-                            </li>
-                        )
-                })}
-            </ul>
-        </HistoryContainer>
+                    {history.map((item) =>{
+                            const {_id, title, amount, type, date, category} = item;
+                            let amountText;
+                            let amountColor;
+
+                            if (type === 'expense') {
+                                amountText = `-$${amount <= 0 ? 0 : amount}`;
+                                amountColor = 'var(--expense-color)';
+                            } else {
+                                amountText = `+$${amount <= 0 ? 0 : amount}`;
+                                amountColor = 'var(--income-color)';
+                            }
+                            
+                            return (
+                                <li key={_id}>
+                                    <div>{format(new Date(date), 'MM/dd/yyyy')}</div>
+                                    <div>{title}</div>
+                                    <div>{category}</div>
+                                    <div style={{ color: amountColor }}>{amountText}</div>
+                                    <div className="edit" onClick={() => handleDelete(_id, type)}>
+                                        <i className="fa-solid fa-trash"></i>
+                                    </div>
+                                </li>
+                            )
+                    })}
+                </ul>
+            </HistoryContainer>
         </>
     )
 }
@@ -132,7 +133,6 @@ const HistoryContainer = styled.div`
         margin-right: 5rem;
         visibility: hidden;
     }
-    
 `;
 
 export default Transactions;

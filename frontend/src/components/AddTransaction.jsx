@@ -221,7 +221,7 @@ const AddContainer = styled.div`
         background-color: transparent;
         &::placeholder {
             color: var(--placeholder-color);
-          }
+        }
     }
 
     .date-picker {
@@ -238,7 +238,7 @@ const AddContainer = styled.div`
 
     form select option {
         color: var(--placeholder-color);
-      }
+    }
 
     form button {
         cursor: pointer;
@@ -252,37 +252,36 @@ const AddContainer = styled.div`
         flex-direction: column;
         width: 30rem;
         margin-top: 0px;
-    
+
         a {
-          display: block;
-          text-decoration: none;
-          margin-top: 15px;
-          border-radius: 10px;
-          padding: 20px;
-          text-align: center;
-          background-color: var(--button-color);
-        }
-      
-      }
+            display: block;
+            text-decoration: none;
+            margin-top: 15px;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--button-color);
+        }    
+    }
     
-      .history-container ul {
+    .history-container ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    }
+    
+    .history-container li {
         display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-      }
+        justify-content: space-between;
+        padding: 20px 0px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        background-color: var(--third-color);
+    }
     
-      .history-container li {
-          display: flex;
-          justify-content: space-between;
-          padding: 20px 0px;
-          border-radius: 10px;
-          margin-bottom: 15px;
-          background-color: var(--third-color);
-      }
-    
-      .history-container li div {
+    .history-container li div {
         margin: 0 20px;
-      }
+    }
 `;
 
 export default AddTransaction;

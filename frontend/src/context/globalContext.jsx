@@ -8,7 +8,6 @@ const TRANSACTION_BASE_URL = "http://localhost:3000/transactions/";
 const GlobalContext = React.createContext();
 
 export const GlobalProvider = ({ children }) => {
-
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [error, setError] = useState(null);
@@ -93,9 +92,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     const totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0);
-
     const totalIncome = incomes.reduce((total, income) => total + income.amount, 0);
-
     const totalBalance = totalIncome - totalExpense;
 
     const getUser = async () => {
