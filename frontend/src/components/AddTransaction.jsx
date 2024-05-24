@@ -12,7 +12,13 @@ const AddTransaction = () => {
     axios.defaults.withCredentials = true;
     
     const {
-        addExpense, addIncome, getIncomes, getExpenses, getTransactionHistoryByCreatedAtDesc, error, setError
+        addExpense, 
+        addIncome, 
+        getIncomes, 
+        getExpenses, 
+        getTransactionHistoryByCreatedAtDesc, 
+        error, 
+        setError
     } = useGlobalContext();
 
     const [inputState, setInputState] = useState({
@@ -65,7 +71,7 @@ const AddTransaction = () => {
     }, []);
 
     useEffect(() => {
-        // No token error not sure what the cause is
+        // No token error during rendering
         if (error && error !== 'no token') {
             toast.error(error);
             setError(null);
@@ -79,7 +85,6 @@ const AddTransaction = () => {
 
                 <div className="form-history-container">
                     <form onSubmit={handleSubmit}>
-
                         <select value={type} name="type" id="type" onChange={handleInput('type')}>
                             <option value="" disabled>Select Type</option>
                             <option value="income">Income</option>
@@ -141,8 +146,9 @@ const AddTransaction = () => {
                         <h2>Recently added</h2>
 
                         <ul>
-                        {history.map((item) =>{
+                            {history.map((item) =>{
                                 const {_id, title, amount, type} = item;
+                                
                                 let amountText;
                                 let amountColor;
 
@@ -160,7 +166,7 @@ const AddTransaction = () => {
                                         <div style={{ color: amountColor }}>{amountText}</div>
                                     </li>
                                 )
-                        })}
+                            })}
                         </ul>
 
                         <Link to="/transactions">View all transactions</Link>

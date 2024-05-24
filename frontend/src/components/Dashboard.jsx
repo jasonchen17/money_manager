@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/globalContext';
 import Navigation from './Navigation';
 import 'chart.js/auto';
-import { format, parseISO, subDays, parse, addDays } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import styled from 'styled-components';
 import axios from 'axios';
 import {
@@ -19,12 +19,21 @@ import {
 const Dashboard = () => {
     axios.defaults.withCredentials = true;
 
-    const { totalIncome, getIncomes, getExpenses, totalExpense, getTransactionHistorySortedByDateDesc } = useGlobalContext();
+    const { 
+        totalIncome, 
+        getIncomes, 
+        getExpenses, 
+        totalExpense, 
+        getTransactionHistorySortedByDateDesc 
+    } = useGlobalContext();
 
     const [...history] = getTransactionHistorySortedByDateDesc().reverse();
-    const slicedHistory = history.slice(0, 5);
+    const slicedHistory = getTransactionHistorySortedByDateDesc().slice(0, 5);
 
+    // Data for the chart
     const data = [];
+
+    // Get the start and end date of the transaction history
     let start;
     let end;
     history.forEach((transaction) => {
@@ -35,30 +44,29 @@ const Dashboard = () => {
     });
 
 
-    let totalIncomee = 0;
-    let totalExpensee = 0;
-    let totalBalancee = 0;
+    // Calculate the total income, expense, and balance each day for chart data
+    let chartTotalIncome = 0;
+    let chartTotalExpense = 0;
+    let chartTotalBalance = 0;
     for (let cur = start; cur <= addDays(end, 1); cur = addDays(cur, 1)) {
-        // let totalIncome = 0;
-        // let totalExpense = 0;
         history.forEach((transaction) => {
             const { amount, type, date } = transaction;
             const temp = format(new Date(date), "MM-dd-yyyy");
             if (temp === format(cur, 'MM-dd-yyyy')) {
                 if (type === 'income') {
-                    totalIncomee += amount;
-                    totalBalancee += amount;
+                    chartTotalIncome += amount;
+                    chartTotalBalance += amount;
                 } else if (type === 'expense') {
-                    totalExpensee += amount;
-                    totalBalancee -= amount;
+                    chartTotalExpense += amount;
+                    chartTotalBalance -= amount;
                 }
             }
         });
         data.push({
             date: format(cur, 'MM-dd-yyyy'),
-            totalBalancee,
-            totalIncomee,
-            totalExpensee
+            chartTotalBalance,
+            chartTotalIncome,
+            chartTotalExpense
         });
     }
 
@@ -78,11 +86,12 @@ const Dashboard = () => {
                             <AreaChart className="cool" data={data}> 
                                 <defs> 
                                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1"> 
-                                    <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} /> 
-                                    <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} /> 
+                                        <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} /> 
+                                        <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} /> 
                                     </linearGradient>
                                 </defs>
-                                <Area type="monotone" dataKey="totalBalancee" stroke="#2451B7" fill="url(#color)" />
+
+                                <Area type="monotone" dataKey="chartTotalBalance" stroke="#2451B7" fill="url(#color)" />
                                 <XAxis 
                                     dataKey="date" 
                                     axisLine={false} 
@@ -92,7 +101,7 @@ const Dashboard = () => {
                                     }} 
                                 /> 
                                 <YAxis 
-                                    dataKey="totalIncomee" 
+                                    dataKey="chartTotalIncome" 
                                     axisLine={false} 
                                     tickLine={false} 
                                     tickCount={8} 
@@ -171,11 +180,11 @@ function CustomTooltip({ active, payload, label }) {
                 </p>
 
                 <p>
-                    <strong>Total Income: </strong> ${payload[0].payload.totalIncomee}
+                    <strong>Total Income: </strong> ${payload[0].payload.chartTotalIncome}
                 </p>
 
                 <p>
-                    <strong>Total Expense: </strong> ${payload[0].payload.totalExpensee}
+                    <strong>Total Expense: </strong> ${payload[0].payload.chartTotalExpense}
                 </p>
             </div>
         );
@@ -289,9 +298,10 @@ const DashboardContainer = styled.div`
         color: #fff;
         padding: 1rem;
         box-shadow: 15px 30px 40px 5px rgba(0, 0, 0, 0.5);
-        text-align: center;
+        text-align: left;
         h4 {
             margin-bottom: 10px;
+            text-align: center;
         }
     }
 `;

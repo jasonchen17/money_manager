@@ -26,7 +26,7 @@ const Navigation = () => {
             <div>
                 <div className="user">
                     <i className="fa-solid fa-circle-user"></i>
-                    {/* name is null if not name is not loaded yet*/}
+                    {/* name is null if name is not loaded yet*/}
                     <h2>{user ? user.name: null}</h2>
                 </div>
 
@@ -116,4 +116,4 @@ const NavStyled = styled.div`
     }
 `;
 
-export default Navigation
+export default Navigation;

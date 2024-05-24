@@ -5,14 +5,13 @@ import { useGlobalContext } from '../context/globalContext';
 import { toast } from 'react-hot-toast';
 
 const Login = () => {
+    const navigate = useNavigate();
     const { error, setError, login } = useGlobalContext();
 
     const [inputState, setInputState] = useState({
         email: '',
         password: ''
     });
-    
-    const navigate = useNavigate();
 
     const {email, password} = inputState;
 

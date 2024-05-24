@@ -5,7 +5,6 @@ import { useGlobalContext } from '../context/globalContext';
 
 const Home = () => {
     const navigate = useNavigate();
-
     const { getUser, setError } = useGlobalContext();
 
     const handleLogin = async () => {
