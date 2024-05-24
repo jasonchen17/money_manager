@@ -15,6 +15,7 @@ import {
     Tooltip,
     CartesianGrid
 } from 'recharts';
+import { Layout } from '../styles/Layout';
 
 const Dashboard = () => {
     axios.defaults.withCredentials = true;
@@ -75,7 +76,7 @@ const Dashboard = () => {
         getExpenses()
     }, []);
     return (
-        <>
+        <Layout>
             <Navigation />
             <DashboardContainer>
                 <h1>Dashboard</h1>
@@ -165,7 +166,7 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </DashboardContainer>
-        </>
+        </Layout>
     )
 }
 
@@ -192,46 +193,66 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 const DashboardContainer = styled.div`
-    margin-left: 364px;
     padding: 20px;
     padding-left: 40px;
-    display: flex;
+    display: block;
     flex-direction: column;
     border: 2px solid;
-    height: 77rem;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     border-radius: 10px;
-    width: 2164px;
     background-color: var(--secondary-color);
+    width: 100%;
+    margin-top: 40px;
+    margin-right: 40px;
+    height: 94vh;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+        padding-left: 20px;
+        margin-top: 5;
+    }
 
     h1 {
         margin-bottom: 20px;
     }
 
+    .menu-toggle {
+        display: none;
+        cursor: pointer;
+        margin-bottom: 20px;
+
+        @media (max-width: 768px) {
+            display: block;
+        }
+    }
+
     .chart-history-container {
         display: flex;
-        margin-bottom: 20px;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     .chart-container {
         border-radius: 10px;
         border: 2px solid;
-        width: 85rem;
         padding: 30px;
+        flex: 1;
+
+        @media (max-width: 768px) {
+            margin-bottom: 20px;
+        }
     }
 
     .history-container {
-        h2 {
-            margin-bottom: 10px;
-        }
-
         padding: 20px;
-        margin-left: 20px;
-        flex-grow: 1;
-        margin-top: 0px;
         padding-top: 0px;
+        margin-left: 20px;
+        flex: 1;
+
+        @media (max-width: 768px) {
+            margin-left: 0;
+        }
 
         a {
             display: block;
@@ -253,35 +274,52 @@ const DashboardContainer = styled.div`
     .history-container li {
         display: flex;
         justify-content: space-between;
-        padding: 20px 0px;
+        padding: 20px;
         border-radius: 10px;
         margin-bottom: 15px;
         background-color: var(--third-color);
     }
 
     .history-container li div {
-        margin: 0 20px;
+        margin: 0 10px;
     }
 
     .totals-container {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
         margin-top: 20px;
-        width: 85rem;
+        flex-direction: column;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     .totals-container li {
+        flex: 1;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         padding: 20px;
+        margin-right: 20px;
         margin-bottom: 20px;
         border-radius: 10px;
-        align-items: center;
         background-color: var(--third-color);
+        width: 50%;
+
+        @media (max-width: 768px) {
+            margin-right: 0;
+        }
+    }
+
+    .totals-container li:last-child {
+        margin-right: 0;
     }
 
     .totals-container li p {
         font-size: 24px;
+        margin-top: 10px;
     }
 
     .income {

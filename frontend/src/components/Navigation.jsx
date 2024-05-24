@@ -59,12 +59,6 @@ const Navigation = () => {
 }
 
 const NavStyled = styled.div`
-    width: 300px;
-    margin-left: 2rem;
-    height: 77rem;
-    top: 50%;
-    transform: translateY(-50%);
-    position: fixed;
     padding: 30px 0px;
     border: 2px solid;
     border-radius: 10px;
@@ -72,10 +66,18 @@ const NavStyled = styled.div`
     justify-content: space-between;
     flex-direction: column;
     background: var(--secondary-color);
+    width: 300px;
+    margin-left: 40px;
+    margin-top: 40px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        margin: 0;
+    }
 
     .user {
         display: flex;
-        align-items:center;
+        align-items: center;
         justify-content: left;
         width: 100%;
         padding-bottom: 20px;
@@ -95,7 +97,7 @@ const NavStyled = styled.div`
     }
 
     ul {
-        padding: 10px 10px;
+        padding: 10px;
     }
 
     ul li {
@@ -103,7 +105,7 @@ const NavStyled = styled.div`
         align-items: center;
         cursor: pointer;
         margin-bottom: 5px;
-        padding: 10px 10px;
+        padding: 10px;
         border-radius: 5px;
     }
 

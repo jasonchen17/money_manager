@@ -4,6 +4,7 @@ import { useGlobalContext } from '../context/globalContext';
 import Navigation from './Navigation';
 import styled from 'styled-components';
 import { format } from 'date-fns';
+import { Layout } from '../styles/Layout';
 
 const Transactions = () => {
     axios.defaults.withCredentials = true;
@@ -25,7 +26,7 @@ const Transactions = () => {
         getExpenses();
     }, [deleteExpense, deleteIncome]);
     return (
-        <>
+        <Layout>
             <Navigation />
             <HistoryContainer>
                 <h1>Transaction History</h1>
@@ -66,7 +67,7 @@ const Transactions = () => {
                     })}
                 </ul>
             </HistoryContainer>
-        </>
+        </Layout>
     )
 }
 
@@ -75,16 +76,19 @@ const HistoryContainer = styled.div`
     padding-left: 40px;
     display: flex;
     flex-direction: column;
-    margin-left: 364px;
-    height: 77rem;
-    position: absolute;
-    width: 2164px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2164px;
+    height: 94vh;
+    width: 100%;
     border: 2px solid;
     border-radius: 10px;
     background-color: var(--secondary-color);
+    margin-top: 40px;
+    margin-right: 40px;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+        padding-left: 20px;
+        margin-top: 5;
+    }
 
     .list-header {
         font-weight: bold;
@@ -95,7 +99,7 @@ const HistoryContainer = styled.div`
         display: flex;
         flex-direction: column;
         margin-top: 20px;
-        overflow-y: scroll;
+        overflow-y: auto;
         padding-right: 20px;
     }
 
@@ -111,9 +115,9 @@ const HistoryContainer = styled.div`
     li {
         display: flex;
         justify-content: space-between;
-        padding: 20px 0px;
+        padding: 20px;
         border-radius: 10px;
-        margin-bottom: 15.4px;
+        margin-bottom: 15px;
         background-color: var(--third-color);
     }
 
@@ -125,14 +129,15 @@ const HistoryContainer = styled.div`
     .edit {
         cursor: pointer;
         flex: 0;
-        margin-right: 5rem;
+        margin-right: 20px;
     }
 
     .edit-header {
         flex: 0;
-        margin-right: 5rem;
+        margin-right: 20px;
         visibility: hidden;
     }
 `;
+
 
 export default Transactions;

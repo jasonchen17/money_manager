@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { Layout } from '../styles/Layout';
 
 const AddTransaction = () => {
     axios.defaults.withCredentials = true;
@@ -78,7 +79,7 @@ const AddTransaction = () => {
         }
     }, [error, setError]);
     return (
-        <>
+        <Layout>
             <Navigation />
             <AddContainer>
                 <h1>Add Transaction</h1>
@@ -173,29 +174,29 @@ const AddTransaction = () => {
                     </div>
                 </div>
             </AddContainer>
-        </>
+        </Layout>
     )
 }
 
 const AddContainer = styled.div`
-    margin-left: 250px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 364px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     border: 2px solid;
-    height: 77rem;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     border-radius: 10px;
-    width: 2164px;
     background-color: var(--secondary-color);
+    width: 100%;
+    margin-top: 40px;
+    margin-right: 40px;
+    height: 94vh;
+    overflow-x: auto;
     padding-left: 40px;
+
+
+    @media (max-width: 768px) {
+        margin-top: 5;
+        padding-left: 20px;
+    }
 
     h1 {
         align-self: flex-start;
@@ -206,6 +207,10 @@ const AddContainer = styled.div`
         margin-top: 20px;
         gap: 20px;
         justify-content: center;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     form {
@@ -258,6 +263,11 @@ const AddContainer = styled.div`
         flex-direction: column;
         width: 30rem;
         margin-top: 0px;
+
+        @media (max-width: 768px) {
+            margin-left: 0;
+            margin-top: 20px;
+        }
 
         a {
             display: block;
