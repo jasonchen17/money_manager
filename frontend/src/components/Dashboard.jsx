@@ -83,8 +83,8 @@ const Dashboard = () => {
 
                 <div className="chart-history-container">
                     <div className="chart-container">
-                        <ResponsiveContainer className="Res" > 
-                            <AreaChart className="cool" data={data}> 
+                        <ResponsiveContainer > 
+                            <AreaChart data={data}> 
                                 <defs> 
                                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1"> 
                                         <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} /> 
@@ -109,7 +109,8 @@ const Dashboard = () => {
                                     tickFormatter={(number) => `$${number}`}
                                     width={100}
                                 /> 
-                                <Tooltip content={CustomTooltip}/> <CartesianGrid opacity={0.1} vertical={false}/> 
+                                <Tooltip content={CustomTooltip}/>
+                                <CartesianGrid opacity={0.1} vertical={false}/> 
                             </AreaChart> 
                         </ResponsiveContainer>
                     </div>
