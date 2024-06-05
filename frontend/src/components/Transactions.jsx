@@ -16,15 +16,17 @@ const Transactions = () => {
     const handleDelete = (id, type) => {
         if (type === 'expense') {
             deleteExpense(id);
+            getExpenses();
         } else {
             deleteIncome(id);
+            getIncomes();
         }
     }
 
     useEffect(() => {
         getIncomes();
         getExpenses();
-    }, [deleteExpense, deleteIncome]);
+    }, []);
     return (
         <Layout>
             <Navigation />
@@ -52,10 +54,15 @@ const Transactions = () => {
                                 amountText = `+$${amount <= 0 ? 0 : amount}`;
                                 amountColor = 'var(--income-color)';
                             }
+
+                            // Set date to local timezone
+                            const newDate = new Date(date); 
+                            newDate.setMinutes(newDate.getMinutes() + newDate.getTimezoneOffset());
+                            const formattedDate = format(newDate, 'MM/dd/yyyy');
                             
                             return (
                                 <li key={_id}>
-                                    <div>{format(new Date(date), 'MM/dd/yyyy')}</div>
+                                    <div>{formattedDate}</div>
                                     <div>{title}</div>
                                     <div>{category}</div>
                                     <div style={{ color: amountColor }}>{amountText}</div>
