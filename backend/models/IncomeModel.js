@@ -1,43 +1,47 @@
 import mongoose from "mongoose";
 
-const IncomeSchema = new mongoose.Schema({
+const IncomeSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     amount: {
-        type: Number,
-        required: true,
-        trim: true
+      type: Number,
+      required: true,
+      trim: true,
     },
     type: {
-        type: String,
-        default:"income"
+      type: String,
+      default: "income",
     },
     date: {
-        type: Date,
-        required: true,
-        trim: true
+      type: Date,
+      required: true,
+      trim: true,
     },
     category: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    }
-}, {timestamps: true});
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 // Capitalize the first letter of the title
-IncomeSchema.pre('save', function(next) {
-    this.title = this.title.charAt(0).toUpperCase() + this.title.slice(1).toLowerCase();
-    next();
+IncomeSchema.pre("save", function (next) {
+  this.title =
+    this.title.charAt(0).toUpperCase() + this.title.slice(1).toLowerCase();
+  next();
 });
 
 const IncomeModel = mongoose.model("Income", IncomeSchema);
 
-export {IncomeModel as Income};
+export { IncomeModel as Income };
