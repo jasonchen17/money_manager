@@ -6,6 +6,8 @@ A simple expense tracker application to help users manage financial transactions
 - Easy management of incomes and expenses
 - Intuitive visualization of transaction history
 
+![Dashboard](https://github.com/jasonchen17/expense_tracker/blob/main/screenshots/dashboard.png?raw=true)
+
 ## Built With
 - **Frontend**: React
 - **Backend**: Node, Express
