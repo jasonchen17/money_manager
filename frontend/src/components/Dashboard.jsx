@@ -72,6 +72,32 @@ const Dashboard = () => {
     });
   }
 
+  const getTicks = (data) => {
+    const dataLength = data.length;
+    const tickCount = 5;
+    
+    if (dataLength <= tickCount) {
+      return data.map((item) => item.date);
+    }
+    
+    const middleIndex = Math.floor(dataLength / 2);
+    const step = Math.floor((dataLength - 1) / (tickCount - 1));
+    const ticks = [data[middleIndex].date];
+    
+    let leftIndex = middleIndex;
+    let rightIndex = middleIndex;
+  
+    while (leftIndex - step >= 0 && rightIndex + step < dataLength - 1) {
+      leftIndex -= step;
+      ticks.unshift(data[leftIndex].date);
+    
+      rightIndex += step;
+      ticks.push(data[rightIndex].date);
+    }
+    
+    return ticks.slice(0, tickCount);
+  };
+
   useEffect(() => {
     getIncomes();
     getExpenses();
@@ -103,13 +129,8 @@ const Dashboard = () => {
                   dataKey="date"
                   axisLine={false}
                   tickLine={false}
-                  tickFormatter={(date) => {
-                    if (format(date, "d") % 7 === 0) {
-                      return format(date, "MMM, d");
-                    } else {
-                      return "";
-                    }
-                  }}
+                  ticks={getTicks(chartData)}
+                  tickFormatter={(date) => format(new Date(date), "MMM, d")}
                 />
                 <YAxis
                   dataKey="chartTotalIncome"
