@@ -135,6 +135,7 @@ const AddTransaction = () => {
               <option value="" disabled>
                 Select Category
               </option>
+              <option value="Income">Income</option>
               <option value="Food">Food</option>
               <option value="Transport">Transport</option>
               <option value="Housing">Housing</option>
