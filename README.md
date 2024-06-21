@@ -58,7 +58,7 @@ A simple expense tracker application to help users manage financial transactions
     npm start
     ```
 
-2. **Start the frontend application**
+2. **Open a second terminal and start the frontend application**
     ```bash
     cd frontend
     
