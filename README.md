@@ -20,47 +20,49 @@ A simple expense tracker application to help users manage financial transactions
 
 ## Installation
 1. **Clone the repository**
-```bash
-  git clone https://github.com/jasonchen17/expense_tracker.git
-
-  cd expense_tracker
-```
+    ```shell
+    git clone https://github.com/jasonchen17/expense_tracker.git
+    
+    cd expense_tracker
+    ```
 
 2. **Create a .env file in the backend directory**
 - Make sure MongoDB is running and add your connection string along with the port and JWT secret variable
-```bash
-  MONGO_URL=<your_mongodb_connection_string>
-  PORT=3000
-  JWT_SECRET=jwttokenkey
-```
+&nbsp;
 
-3. **Install backend dependencies**
-```bash
-  cd backend
+    ```text
+    MONGO_URL=<your_mongodb_connection_string>
+    PORT=3000
+    JWT_SECRET=jwttokenkey
+    ```
 
-  npm install
-```
+2. **Install backend dependencies**
+    ```bash
+    cd backend
+    
+    npm install
+    ```
 
 4. **Install frontend dependencies**
-```bash
-  cd frontend
-
-  npm install
-```
+    ```bash
+    cd frontend
+    
+    npm install
+    ```
 
 ## Usage
 1. **Start the backend server**
-```bash
-  cd backend
-
-  npm start
-```
+    ```bash
+    cd backend
+    
+    npm start
+    ```
 
 2. **Start the frontend application**
-```bash
-  cd frontend
-
-  npm run dev
-```
+    ```bash
+    cd frontend
+    
+    npm run dev
+    ```
 
 3. **Open your browser and go to [http://localhost:5173](http://localhost:5173) to view the application**
