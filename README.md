@@ -26,7 +26,7 @@ A simple expense tracker application to help users manage financial transactions
     cd expense_tracker
     ```
 
-2. **Create a .env file in the backend directory**
+2. **Create a `.env` file in the `backend` directory**
 - Make sure MongoDB is running and add your connection string along with the port and JWT secret variable
 &nbsp;
 
