@@ -26,9 +26,12 @@ A simple expense tracker application to help users manage financial transactions
   cd expense_tracker
 ```
 
-2. **Make sure MongoDB is running and add your connection string in `.env`**
+2. **Create a .env file in the backend directory**
+- Make sure MongoDB is running and add your connection string along with the port and JWT secret variable
 ```bash
   MONGO_URL=<your_mongodb_connection_string>
+  PORT=3000
+  JWT_SECRET=jwttokenkey
 ```
 
 3. **Install backend dependencies**
