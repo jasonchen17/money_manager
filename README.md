@@ -9,7 +9,7 @@ A simple expense tracker application to help users manage financial transactions
 ![Dashboard](https://github.com/jasonchen17/expense_tracker/blob/main/screenshots/dashboard.png?raw=true)
 
 ## Built With
-- **Frontend**: React
+- **Frontend**: React, Vite, Styled-components
 - **Backend**: Node, Express
 - **Database**: MongoDB
 
