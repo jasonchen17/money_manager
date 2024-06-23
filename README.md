@@ -1,12 +1,12 @@
-# Expense Tracker
+# Money Manager
 
 ## Description
-A simple expense tracker application to help users manage financial transactions with ease that features:
+A personal finance tracking application to help users manage financial transactions with ease that features:
 - Secure login and registration
 - Easy management of incomes and expenses
 - Intuitive visualization of transaction history
 
-![Dashboard](https://github.com/jasonchen17/expense_tracker/blob/main/screenshots/dashboard.png?raw=true)
+![Dashboard](https://github.com/jasonchen17/money_manager/blob/main/screenshots/dashboard.png?raw=true)
 
 ## Built With
 - **Frontend**: React, Vite, Styled Components
@@ -21,9 +21,9 @@ A simple expense tracker application to help users manage financial transactions
 ## Installation
 1. **Clone the repository**
     ```shell
-    git clone https://github.com/jasonchen17/expense_tracker.git
+    git clone https://github.com/jasonchen17/money_manager.git
     
-    cd expense_tracker
+    cd money_manager
     ```
 
 2. **Create a `.env` file in the `backend` directory**

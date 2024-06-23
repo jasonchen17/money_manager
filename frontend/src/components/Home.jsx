@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <HomeContainer>
       <div className="NavBar">
-        <h1>Expense Tracker</h1>
+        <h1>Money Manager</h1>
 
         <div className="Button">
           <div className="login-button" onClick={handleLogin}>
