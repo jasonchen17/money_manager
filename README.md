@@ -36,7 +36,7 @@ A personal finance tracking application to help users manage financial transacti
     JWT_SECRET=jwttokenkey
     ```
 
-2. **Install backend dependencies**
+3. **Install backend dependencies**
     ```bash
     cd backend
     
