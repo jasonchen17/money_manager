@@ -6,7 +6,7 @@ A personal finance tracking application to help users manage financial transacti
 - Easy management of incomes and expenses
 - Intuitive visualization of transaction history
 
-![Dashboard](https://github.com/jasonchen17/money_manager/blob/main/screenshots/dashboard.png?raw=true)
+![dashboard](https://github.com/jasonchen17/money_manager/blob/main/screenshots/dashboard.png?raw=true)
 
 ## Built With
 - **Frontend**: React, Vite, Styled Components
