@@ -3,7 +3,7 @@
 ## Description
 A personal finance tracking application to help users manage financial transactions with ease that features:
 - Secure login and registration
-- Easy management of incomes and expenses
+- Easy management of income and expenses
 - Intuitive visualization of transaction history
 
 ![dashboard](https://github.com/jasonchen17/money_manager/blob/main/screenshots/dashboard.png?raw=true)
